@@ -30,7 +30,7 @@ Route::get('/seller', 'sellerController@index');
 
 
 // DASHBOARD ADMIN
-Route::get('/dashboard/admin', 'dashboardController@indexadmin');
+Route::get('/admin', 'dashboardController@indexadmin');
 
 // ADMIN SELLER PAGE
 Route::get('/admin/seller', 'sellerController@list_seller');
@@ -43,5 +43,11 @@ Route::get('/admin/seller/delete/{id}', 'sellerController@destroy');
 //DASHBOARD SELLER
 Route::get('/dashboard', 'sellerController@index');
 
+// ADMIN VISITOR
+Route::get('/admin/visitor', 'visitorController@index');
+Route::get('/admin/visitor/history/{id}', 'visitorController@history');
+
+//UPLOAD EXCEL
+Route::post('/visitor/excel', 'excelController@index');
 
 

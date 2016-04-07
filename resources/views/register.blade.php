@@ -25,10 +25,10 @@
                 <h1 class="logo-name">IN+</h1>
 
             </div>
-            <h3>Register to IN+</h3>
+            <h3>Register to Magnitude</h3>
             <p>Create account to see it in action.</p>
             <p>{{$alert}}</p>
-            <form class="m-t" method="POST" role="form" action="/register">
+            <form class="m-t" method="POST" role="form" action="{{Config::get('app.url')}}public/register">
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 <div class="form-group">
                     <input type="text" class="form-control" placeholder="Name" name='name' required="" value='{{$name}}'>
@@ -45,7 +45,7 @@
                 <button type="submit" class="btn btn-primary block full-width m-b">Register</button>
 
                 <p class="text-muted text-center"><small>Already have an account?</small></p>
-                <a class="btn btn-sm btn-white btn-block" href="/login">Login</a>
+                <a class="btn btn-sm btn-white btn-block" href="{{Config::get('app.url')}}public/login">Login</a>
             </form>
             <p class="m-t"> <small>Inspinia we app framework base on Bootstrap 3 &copy; 2014</small> </p>
         </div>

@@ -6,11 +6,17 @@ use Illuminate\Http\Request;
 use Auth;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\visitor;
+use App\checkinBooth;
+use App\checkinEvent;
 
-class dashboardController extends Controller
+class visitorController extends Controller
 {
     function __construct(){
         $this->middleware('auth');
+        $this->visitor = new visitor;
+        $this->ce      = new checkinEvent;
+        $this->cb      = new checkinBooth;
     }
     /**
      * Display a listing of the resource.
@@ -19,13 +25,13 @@ class dashboardController extends Controller
      */
     public function index()
     {
+        $getvisitor     = $this->visitor->get_page();
+        $view['list']   = $getvisitor;
+        $view['url']    = "visitor/excel";
+        $view['notip']  = session('notip');
+        // var_dump($getvisitor);die;
+        return view('visitor.list',$view);
         //
-    }
-
-    public function indexadmin()
-    {
-        $view['role'] = session('role');
-        return view('dashboard.indexadmin',$view);
     }
 
     /**
@@ -33,9 +39,17 @@ class dashboardController extends Controller
      *
      * @return Response
      */
-    public function create()
-    {
-        //
+    public function history($id)
+    {   
+        $getvisitor             = $this->visitor->get_id($id);
+        $event                  = $this->ce->get_idvisitor_all($id);
+        $booth                  = $this->cb->get_idvisitor_all($id);
+        $view['notip']          = session('notip');
+        $view['visitor']        = $getvisitor;
+        $view['event']          = $event;
+        $view['booth']          = $booth;
+
+        return view('visitor.detail',$view);
     }
 
     /**
@@ -92,15 +106,5 @@ class dashboardController extends Controller
     public function destroy($id)
     {
         //
-    }
-
-    public function logout(){
-        // var_dump(session()->flush());
-        // if(session()->flush()){
-            session()->flush();
-            return redirect('/login');  
-        // }else{
-        //     return redirect('/admin');
-        // }
     }
 }

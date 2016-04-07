@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>INSPINIA | Static Tables</title>
+    <title>Magnitude | Prototype</title>
 
     <!-- <link href="{{Config('app.url')}}public/css/bootstrap.min.css" rel="stylesheet">
     <link href="{{Config('app.url')}}public/font-awesome/css/font-awesome.css" rel="stylesheet">
@@ -27,11 +27,7 @@
 
     <nav class="navbar-default navbar-static-side" role="navigation">
         <div class="sidebar-collapse">
-            @if($role == 'admin')
-                @include('menu/menuadmin')
-            @else
-                @include('menu/menu')
-            @endif
+            @include('menu/menuadmin')
         </div>
     </nav>
 
@@ -48,17 +44,17 @@
         </div>
             <ul class="nav navbar-top-links navbar-right">
                 <li>
-                    <span class="m-r-sm text-muted welcome-message">Welcome to INSPINIA+ Admin Theme.</span>
+                    <span class="m-r-sm text-muted welcome-message">Welcome to Magnitude.</span>
                 </li>
                 <li class="dropdown">
-                    <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
+                    <!-- <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
                         <i class="fa fa-envelope"></i>  <span class="label label-warning">16</span>
-                    </a>
+                    </a> -->
                     <ul class="dropdown-menu dropdown-messages">
                         <li>
                             <div class="dropdown-messages-box">
                                 <a href="profile.html" class="pull-left">
-                                    <img alt="image" class="img-circle" src="img/a7.jpg">
+                                    <img alt="image" class="img-circle" src="">
                                 </a>
                                 <div class="media-body">
                                     <small class="pull-right">46h ago</small>
@@ -103,7 +99,7 @@
                         </li>
                     </ul>
                 </li>
-                <li class="dropdown">
+                <!-- <li class="dropdown">
                     <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
                         <i class="fa fa-bell"></i>  <span class="label label-primary">8</span>
                     </a>
@@ -144,11 +140,11 @@
                             </div>
                         </li>
                     </ul>
-                </li>
+                </li> -->
 
 
                 <li>
-                    <a href="/logout">
+                    <a href="{{Config::get('app.url')}}public/logout">
                         <i class="fa fa-sign-out"></i> Log out
                     </a>
                 </li>
@@ -156,29 +152,29 @@
 
         </nav>
         </div>
-            <div class="row wrapper border-bottom white-bg page-heading">
-                <div class="col-lg-10">
-                    <h2>Static Tables</h2>
-                    <ol class="breadcrumb">
-                        <li>
-                            <a href="index.html">Home</a>
-                        </li>
-                        <li>
-                            <a>Tables</a>
-                        </li>
-                        <li class="active">
-                            <strong>Static Tables</strong>
-                        </li>
-                    </ol>
-                </div>
-                <div class="col-lg-2">
-
-                </div>
+        @yield('content')
+        <!-- <div class="row wrapper border-bottom white-bg page-heading">
+            <div class="col-lg-10">
+                <h2>Static Tables</h2>
+                <ol class="breadcrumb">
+                    <li>
+                        <a href="index.html">Home</a>
+                    </li>
+                    <li>
+                        <a>Tables</a>
+                    </li>
+                    <li class="active">
+                        <strong>Static Tables</strong>
+                    </li>
+                </ol>
             </div>
-        <div class="wrapper wrapper-content animated fadeInRight">
+            <div class="col-lg-2">
+
+            </div>
+        </div> -->
+        <!-- <div class="wrapper wrapper-content animated fadeInRight">
            
-          @yield('content')
-        </div>
+        </div> -->
         <div class="footer">
             <div class="pull-right">
                 10GB of <strong>250GB</strong> Free.

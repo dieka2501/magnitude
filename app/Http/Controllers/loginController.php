@@ -21,7 +21,7 @@ class loginController extends Controller
      */
     public function index()
     {
-        $data['alert'] = session('alert');
+        $data['alert'] = session('status');
         return view('login',$data);
     }
 
@@ -37,16 +37,16 @@ class loginController extends Controller
             $username  = $request->get('username');
             $password  = $request->get('password');
             // var_dump(Auth::attempt(['email'=>$username,'password'=>$password])); die;
-            if(Auth::attempt(['email'=>$username,'password'=>$password])){
-                $get_login      = $this->login->get_email($username);
+            if(Auth::attempt(['username'=>$username,'password'=>$password])){
+                $get_login      = $this->login->get_username($username);
                 $request->session()->put('username',$username);
                 $request->session()->put('password',$password);
-                $request->session()->put('role',$get_login->role);
+                $request->session()->put('role',$get_login->group);
                 $request->session()->put('login',true);
-                if($get_login->role == 'admin'){
-                    return redirect('/dashboard/admin');        
+                if($get_login->group == 'admin'){
+                    return redirect('/admin');        
                 }else{
-                    return redirect('/dashboard');        
+                    return redirect('/admin');        
                 }
                 
             }else{
