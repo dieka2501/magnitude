@@ -64,28 +64,39 @@
                             </div> -->
                         </div>
                     </div>
+                    <label>Filter Data</label>
+                    <form method="GET" action="">
                     <div class="row">
-                        <div class="col-sm-5 m-b-xs">
-                            <!-- <select class="input-sm form-control input-s-sm inline">
-                                <option value="0">Option 1</option>
-                                <option value="1">Option 2</option>
-                                <option value="2">Option 3</option>
-                                <option value="3">Option 4</option>
-                            </select> -->
+                        <div class="col-md-4 m-b-xs">
+                            {!!Form::select('position',$arr_position,$position,['class'=>'form-control'])!!}
                         </div>
-                        <div class="col-sm-4 m-b-xs">
-                            <!-- <div data-toggle="buttons" class="btn-group">
-                                <label class="btn btn-sm btn-white"> <input type="radio" id="option1" name="options"> Day </label>
-                                <label class="btn btn-sm btn-white active"> <input type="radio" id="option2" name="options"> Week </label>
-                                <label class="btn btn-sm btn-white"> <input type="radio" id="option3" name="options"> Month </label>
-                            </div> -->
+                        <div class="col-md-4 m-b-xs">
+                            {!!Form::select('region',$arr_region,$region,['class'=>'form-control'])!!}
                         </div>
-                        <div class="col-sm-3"><!-- 
-                            <div class="input-group"><input type="text" placeholder="Search" class="input-sm form-control"> <span class="input-group-btn">
-                                <button type="button" class="btn btn-sm btn-primary"> Go!</button> </span>
-                            </div> -->
+                        <div class="col-md-4 m-b-xs">
+                            {!!Form::select('country',$arr_country,$country,['class'=>'form-control'])!!}
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-md-4 m-b-xs">
+                             {!!Form::select('lob',$arr_lob,$lob,['class'=>'form-control'])!!}
+                        </div>
+                        <div class="col-md-4 m-b-xs">
+                            
+                             {!!Form::select('interest_product',$arr_interest_product,$interest_product,['class'=>'form-control'])!!}
+                    
+                        </div>
+                        <div class="col-md-4 m-b-xs">
+                            
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 text-left">
+                            <button class="btn btn-primary">Search</button>
+                        </div>
+                    </div>
+                    </form>
                     <div class="table-responsive">
                         <p>{{session('alert')}}</p>
                         <table class="table table-striped">

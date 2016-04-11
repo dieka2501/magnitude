@@ -7,6 +7,7 @@ use Auth;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\visitor;
+use App\kategori;
 use App\checkinBooth;
 use App\checkinEvent;
 
@@ -14,22 +15,94 @@ class visitorController extends Controller
 {
     function __construct(){
         $this->middleware('auth');
-        $this->visitor = new visitor;
-        $this->ce      = new checkinEvent;
-        $this->cb      = new checkinBooth;
+        $this->visitor      = new visitor;
+        $this->ce           = new checkinEvent;
+        $this->cb           = new checkinBooth;
+        $this->kategori     = new kategori;
     }
     /**
      * Display a listing of the resource.
      *
      * @return Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $getvisitor     = $this->visitor->get_page();
-        $view['list']   = $getvisitor;
-        $view['url']    = "visitor/excel";
-        $view['notip']  = session('notip');
-        // var_dump($getvisitor);die;
+        if($request->has('position') || $request->has('region') || $request->has('country') || $request->has('lob') || $request->has('interest_product')){
+            $position          = $request->input('position');
+            $region            = $request->input('region');
+            $country           = $request->input('country');
+            $lob               = $request->input('lob');
+            $interest          = $request->input('interest_product');
+            $getvisitor                          = $this->visitor->get_search($position,$region,$country,$lob,$interest);    
+            // var_dump($lob);
+            // echo "satu";
+        }else{
+            $getvisitor                          = $this->visitor->get_page();    
+            // echo "dua";
+        }
+        
+        $getjabatan                          = $this->visitor->get_position();
+        $getregion                           = $this->visitor->get_region();
+        $getcountry                          = $this->visitor->get_country();
+        $getlob                              = $this->visitor->get_lob();
+        $getinterest                         = $this->kategori->get_all();
+        // var_dump($getjabatan);die;
+        $arr_position['']                    = "All Position";
+        foreach ($getjabatan as $jabatans) {
+            if($jabatans->jabatan != ""){
+                $arr_position[strtolower($jabatans->jabatan)] = strtoupper($jabatans->jabatan);
+            }
+            
+        }
+        $arr_region                    = [''=>'All Region/City'];
+        foreach ($getregion as $regions) {
+            if($regions->region != ""){
+                $arr_region[strtolower($regions->region)] = strtoupper($regions->region);
+            }
+            
+        }
+        $arr_country                    = [''=>'All Country'];
+        foreach ($getcountry as $countrys) {
+            if($countrys->country != ""){
+                $arr_country[strtolower($countrys->country)] = strtoupper($countrys->country);
+            }
+            
+        }
+        $arr_lob                    = [''=>'All Line Of Business'];
+        foreach ($getlob as $lobs) {
+            if($lobs->bidang != ""){
+                if(strpos($lobs->bidang, ",") != FALSE){
+                    $explodebidang = explode(',', $lobs->bidang);
+                    foreach ($explodebidang as $expbidang) {
+                        if(array_search($expbidang, $arr_lob) === false ){
+                            $arr_lob[strtolower($expbidang)] = strtoupper($expbidang);    
+                        }
+                    }
+                }else{
+                    $arr_lob[strtolower($lobs->bidang)] = strtoupper($lobs->bidang);    
+                }
+                
+            }
+            
+        }
+        $arr_interest                    = [''=>'All Interest Product'];
+        foreach ($getinterest as $interests) {
+            $arr_interest[strtolower($interests->nama_kategori)] = strtoupper($interests->nama_kategori);    
+        }
+        // var_dump($arr_position);die;
+        $view['list']                        = $getvisitor;
+        $view['url']                         = "visitor/excel";
+        $view['notip']                       = session('notip');
+        $view['arr_position']                = $arr_position;
+        $view['position']                    = $request->input('position');
+        $view['arr_region']                  = $arr_region;
+        $view['region']                      = $request->input('region');
+        $view['arr_country']                 = $arr_country;
+        $view['country']                     = $request->input('country'); 
+        $view['arr_lob']                     = $arr_lob;
+        $view['lob']                         = $request->input('lob'); 
+        $view['arr_interest_product']        = $arr_interest;
+        $view['interest_product']            = $request->input('interest_product'); 
         return view('visitor.list',$view);
         //
     }
