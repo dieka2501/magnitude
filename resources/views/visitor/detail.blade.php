@@ -41,7 +41,7 @@
                             <li><a href="#">Config option 2</a>
                             </li>
                         </ul> -->
-                        <a href="{!!config('app.url')!!}public/admin/visitor">
+                        <a href="{!!config('app.url')!!}public/admin/visitor" class="btn btn-danger btn-xs">
                             Back
                         </a>
                     </div>
