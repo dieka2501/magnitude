@@ -47,8 +47,8 @@ class excelController extends Controller
                             $interest_product       = ($res->interest_product != null)?$res->interest_product : ""; 
                             $source_information     = ($res->source_information != null)?$res->source_information : ""; 
                             if(true){
-                                if(count($this->visitor->get_email($email))==0 || $email == ""){
-                                    if(count($this->visitor->get_phone($phone))==0 || $phone == ""){
+                                if((count($this->visitor->get_email($email))==0 && count($this->visitor->get_phone($phone))==0 )|| ($email == "" || $phone == "") ){
+                                    if( true ){
                                         $insert['nama_visitor']         = $nama;
                                         $insert['perusahaan']           = $perusahaan;
                                         $insert['jabatan']              = $jabatan;
