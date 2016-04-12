@@ -27,13 +27,16 @@ class visitorController extends Controller
      */
     public function index(Request $request)
     {
-        if($request->has('position') || $request->has('region') || $request->has('country') || $request->has('lob') || $request->has('interest_product')){
-            $position          = $request->input('position');
-            $region            = $request->input('region');
-            $country           = $request->input('country');
-            $lob               = $request->input('lob');
-            $interest          = $request->input('interest_product');
-            $getvisitor                          = $this->visitor->get_search($position,$region,$country,$lob,$interest);    
+        $position          = $request->input('position');
+        $region            = $request->input('region');
+        $country           = $request->input('country');
+        $lob               = $request->input('lob');
+        $interest          = $request->input('interest_product');
+        $purpose           = $request->input('purpose');
+        $source            = $request->input('source');
+        if($request->has('position') || $request->has('region') || $request->has('country') || $request->has('lob') || $request->has('interest_product') || $request->has('purpose') ||  $request->has('source')){
+            
+            $getvisitor                          = $this->visitor->get_search($position,$region,$country,$lob,$interest,$purpose,$source);    
             // var_dump($lob);
             // echo "satu";
         }else{
@@ -103,6 +106,9 @@ class visitorController extends Controller
         $view['lob']                         = $request->input('lob'); 
         $view['arr_interest_product']        = $arr_interest;
         $view['interest_product']            = $request->input('interest_product'); 
+        $view['purpose']                     = $purpose;
+        $view['source']                      = $source; 
+        $view['datacount']                   = $this->visitor->get_count(); 
         return view('visitor.list',$view);
         //
     }

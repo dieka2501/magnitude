@@ -87,6 +87,18 @@
                     
                         </div>
                         <div class="col-md-4 m-b-xs">
+                            <input type="text" name="purpose" class="form-control" value="{!!$purpose!!}" placeholder="Purpose Of Visit"></input>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 m-b-xs">
+                            <input type="text" name="source" class="form-control" value="{!!$source!!}" placeholder="Source Of Information"></input>
+                        </div>
+                        <div class="col-md-4 m-b-xs">
+                    
+                        </div>
+                        <div class="col-md-4 m-b-xs">
                             
                         </div>
 
@@ -130,14 +142,17 @@
                             @endforeach()
                             </tbody>
                         </table>
-                        <?php echo $list->render() ?>
+                        <?php echo $list->appends(['position'=>$position,'region'=>$region,'country'=>$country,'lob'=>$lob,'interest_product'=>$interest_product,'purpose'=>$purpose,'source'=>$source])->render() ?>
                     </div>
-
+                    Number of Data {!!$datacount!!}
                 </div>
             </div>
         </div>
 
     </div>   
+</div>
+<div>
+    
 </div>
   
 @endsection('content')

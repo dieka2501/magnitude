@@ -45,22 +45,24 @@ class excelController extends Controller
                             $alamat                 = ($res->alamat != null)?$res->alamat : ""; 
                             $bidang                 = ($res->bidang != null)?$res->bidang : ""; 
                             $interest_product       = ($res->interest_product != null)?$res->interest_product : ""; 
-                            if(count($this->visitor->get_nama($nama))==0){
-                                if(count($this->visitor->get_email($email))==0){
-                                    if(count($this->visitor->get_phone($phone))==0){
-                                        $insert['nama_visitor']     = $nama;
-                                        $insert['perusahaan']       = $perusahaan;
-                                        $insert['jabatan']          = $jabatan;
-                                        $insert['purpose']          = $tujuan;
-                                        $insert['nature_business']  = $nature_business;
-                                        $insert['email']            = $email;
-                                        $insert['region']           = $region;
-                                        $insert['country']          = $country;
-                                        $insert['phone']            = $phone;
-                                        $insert['alamat']           = $alamat;
-                                        $insert['bidang']           = $bidang;
-                                        $insert['interest_product'] = $interest_product;
-                                        $insert['created_at']       = date('Y-m-d H:i:s');
+                            $source_information     = ($res->source_information != null)?$res->source_information : ""; 
+                            if(true){
+                                if(count($this->visitor->get_email($email))==0 || $email == ""){
+                                    if(count($this->visitor->get_phone($phone))==0 || $phone == ""){
+                                        $insert['nama_visitor']         = $nama;
+                                        $insert['perusahaan']           = $perusahaan;
+                                        $insert['jabatan']              = $jabatan;
+                                        $insert['purpose']              = $tujuan;
+                                        $insert['nature_business']      = $nature_business;
+                                        $insert['email']                = $email;
+                                        $insert['region']               = $region;
+                                        $insert['country']              = $country;
+                                        $insert['phone']                = $phone;
+                                        $insert['alamat']               = $alamat;
+                                        $insert['bidang']               = $bidang;
+                                        $insert['interest_product']     = $interest_product;
+                                        $insert['source_information']   = $source_information;
+                                        $insert['created_at']           = date('Y-m-d H:i:s');
                                         $ids = $this->visitor->add($insert);
                                         if($ids > 0){
                                             $json['name']       = $nama;
