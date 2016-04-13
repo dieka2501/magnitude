@@ -96,7 +96,7 @@
                             <input type="text" name="source" class="form-control" value="{!!$source!!}" placeholder="Source Of Information"></input>
                         </div>
                         <div class="col-md-4 m-b-xs">
-                    
+                        <input type="text" name="email" class="form-control" value="{!!$email!!}" placeholder="Email Of Visitor"></input>
                         </div>
                         <div class="col-md-4 m-b-xs">
                             
@@ -142,7 +142,7 @@
                             @endforeach()
                             </tbody>
                         </table>
-                        <?php echo $list->appends(['position'=>$position,'region'=>$region,'country'=>$country,'lob'=>$lob,'interest_product'=>$interest_product,'purpose'=>$purpose,'source'=>$source])->render() ?>
+                        <?php echo $list->appends(['position'=>$position,'region'=>$region,'country'=>$country,'lob'=>$lob,'interest_product'=>$interest_product,'purpose'=>$purpose,'source'=>$source,'email'=>$email])->render() ?>
                     </div>
                     Number of Data {!!$datacount!!}
                 </div>

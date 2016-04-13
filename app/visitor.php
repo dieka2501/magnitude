@@ -41,7 +41,7 @@ class visitor extends Model
 	function get_interest(){
 		return visitor::select('interest_product')->distinct()->orderBy('interest_product','ASC')->get();
 	}
-	function get_search($position,$region,$country,$lob,$interest,$purpose,$source){
+	function get_search($position,$region,$country,$lob,$interest,$purpose,$source,$email){
 
 		$position = ($position != "" )? $position: "%";
 		$region   = ($region != "" )? $region: "%";
@@ -50,6 +50,7 @@ class visitor extends Model
 		$interest = ($interest != "" )? '%'.$interest.'%': "%";
 		$purpose  = ($purpose != "" )? '%'.$purpose.'%': "%";
 		$source   = ($source != "" )? '%'.$source.'%': "%";
+		$email   = ($email != "" )? '%'.$email.'%': "%";
 		return visitor::orderBy('id','DESC')
 						->where('jabatan','like',$position)	
 						->where('region','like',$region)
@@ -58,6 +59,7 @@ class visitor extends Model
 						->where('interest_product','like',$interest)	
 						->where('purpose','like',$purpose)	
 						->where('source_information','like',$source)	
+						->where('email','like',$email)	
 						->paginate(20);
 	}
 	function get_count(){

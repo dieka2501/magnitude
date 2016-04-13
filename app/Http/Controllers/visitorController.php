@@ -34,9 +34,10 @@ class visitorController extends Controller
         $interest          = $request->input('interest_product');
         $purpose           = $request->input('purpose');
         $source            = $request->input('source');
-        if($request->has('position') || $request->has('region') || $request->has('country') || $request->has('lob') || $request->has('interest_product') || $request->has('purpose') ||  $request->has('source')){
+        $email             = $request->input('email');
+        if($request->has('position') || $request->has('region') || $request->has('country') || $request->has('lob') || $request->has('interest_product') || $request->has('purpose') ||  $request->has('source') || $request->has('email') ){
             
-            $getvisitor                          = $this->visitor->get_search($position,$region,$country,$lob,$interest,$purpose,$source);    
+            $getvisitor                          = $this->visitor->get_search($position,$region,$country,$lob,$interest,$purpose,$source,$email);    
             // var_dump($lob);
             // echo "satu";
         }else{
@@ -108,6 +109,7 @@ class visitorController extends Controller
         $view['interest_product']            = $request->input('interest_product'); 
         $view['purpose']                     = $purpose;
         $view['source']                      = $source; 
+        $view['email']                      = $email; 
         $view['datacount']                   = $this->visitor->get_count(); 
         return view('visitor.list',$view);
         //
