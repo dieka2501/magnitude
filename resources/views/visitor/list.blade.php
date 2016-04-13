@@ -126,9 +126,20 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <?php $i = 0?>
+                            <?php $i = 0;
+                            if((Input::get('page') =='1')){
+                                    $i=0;   
+                                }else{
+                                    $i = 10 * Input::get('page');
+                                }
+                                $numawal  = $i +1;
+                                $numakhir = $i+20;
+                            ?>
                             @foreach($list as $lists)
-                            <?php $i++?>
+                            <?php 
+
+                            $i++?>
+
                             <tr>
                                 <td>{{$i}}</td>
                                 <td>{{$lists->nama_visitor}}</td>
@@ -144,7 +155,7 @@
                         </table>
                         <?php echo $list->appends(['position'=>$position,'region'=>$region,'country'=>$country,'lob'=>$lob,'interest_product'=>$interest_product,'purpose'=>$purpose,'source'=>$source,'email'=>$email])->render() ?>
                     </div>
-                    Number of Data {!!$datacount!!}
+                    <strong>{!!$numawal!!} - {!!$numakhir!!} of {!!$datacount!!}</strong>
                 </div>
             </div>
         </div>
