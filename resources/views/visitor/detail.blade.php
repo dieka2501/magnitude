@@ -74,6 +74,10 @@
                                     <th>Country</th>
                                     <td>{!!$visitor->country!!}</td>
                                 </tr>
+                                <tr>
+                                    <th>Source Of Information</th>
+                                    <td>{!!$visitor->source_information!!}</td>
+                                </tr>
                             </table>    
                         </div>
                         <div class="col-md-6">
