@@ -49,19 +49,19 @@ class excelController extends Controller
                             if(true){
                                 if((count($this->visitor->get_email($email))==0 && count($this->visitor->get_phone($phone))==0 )|| ($email == "" || $phone == "") ){
                                     if( true ){
-                                        $insert['nama_visitor']         = $nama;
-                                        $insert['perusahaan']           = $perusahaan;
-                                        $insert['jabatan']              = $jabatan;
-                                        $insert['purpose']              = $tujuan;
-                                        $insert['nature_business']      = $nature_business;
-                                        $insert['email']                = $email;
-                                        $insert['region']               = $region;
-                                        $insert['country']              = $country;
-                                        $insert['phone']                = $phone;
-                                        $insert['alamat']               = $alamat;
-                                        $insert['bidang']               = $bidang;
-                                        $insert['interest_product']     = $interest_product;
-                                        $insert['source_information']   = $source_information;
+                                        $insert['nama_visitor']         = str_replace("'", "", $nama);
+                                        $insert['perusahaan']           = str_replace("'", "",$perusahaan);
+                                        $insert['jabatan']              = str_replace("'", "",$jabatan);
+                                        $insert['purpose']              = str_replace("'", "",$tujuan);
+                                        $insert['nature_business']      = str_replace("'", "",$nature_business);
+                                        $insert['email']                = str_replace("'", "",$email);
+                                        $insert['region']               = str_replace("'", "",$region);
+                                        $insert['country']              = str_replace("'", "",$country);
+                                        $insert['phone']                = str_replace("'", "",$phone);
+                                        $insert['alamat']               = str_replace("'", "",$alamat);
+                                        $insert['bidang']               = str_replace("'", "",$bidang);
+                                        $insert['interest_product']     = str_replace("'", "",$interest_product);
+                                        $insert['source_information']   = str_replace("'", "",$source_information);
                                         $insert['created_at']           = date('Y-m-d H:i:s');
                                         $ids = $this->visitor->add($insert);
                                         if($ids > 0){

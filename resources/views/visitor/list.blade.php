@@ -127,21 +127,23 @@
                             </thead>
                             <tbody>
                             <?php $i = 0;
-                            if((Input::get('page') =='1')){
-                                    $i=0;   
-                                }else{
-                                    $i = 10 * Input::get('page');
-                                }
-                                $numawal  = $i +1;
-                                $numakhir = $i+20;
+                                $num = 20 * (Input::get('page')-1);
+                            // if((Input::get('page') =='1')){
+                            //         $i=0;   
+                            //     }else{
+                                    
+                            //     }
+                                $numawal  = $num +1;
+                                $numakhir = $num +20;
+
                             ?>
                             @foreach($list as $lists)
                             <?php 
-
-                            $i++?>
+                            $i++;
+                            $nums = $num +$i ?>
 
                             <tr>
-                                <td>{{$i}}</td>
+                                <td>{{$nums}}</td>
                                 <td>{{$lists->nama_visitor}}</td>
                                 <td>{{$lists->email}}</td>
                                 <td>{{$lists->phone}}</td>

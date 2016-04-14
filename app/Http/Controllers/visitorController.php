@@ -44,6 +44,7 @@ class visitorController extends Controller
             $getvisitor                          = $this->visitor->get_page();    
             // echo "dua";
         }
+        // var_dump(count($getvisitor));
         
         $getjabatan                          = $this->visitor->get_position();
         $getregion                           = $this->visitor->get_region();
