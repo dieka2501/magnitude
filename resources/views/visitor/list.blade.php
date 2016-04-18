@@ -127,7 +127,12 @@
                             </thead>
                             <tbody>
                             <?php $i = 0;
-                                $num = 20 * (Input::get('page')-1);
+                            	if(Input::has('page')){
+                            		$haspage = Input::get('page');
+                            	}else{
+                            		$haspage = 1;
+                            	}
+                                $num = 20 * ($haspage-1);
                             // if((Input::get('page') =='1')){
                             //         $i=0;   
                             //     }else{
