@@ -110,7 +110,7 @@ class visitorController extends Controller
         $view['interest_product']            = $request->input('interest_product'); 
         $view['purpose']                     = $purpose;
         $view['source']                      = $source; 
-        $view['email']                      = $email; 
+        $view['email']                       = $email; 
         $view['datacount']                   = $this->visitor->get_count(); 
         return view('visitor.list',$view);
         //

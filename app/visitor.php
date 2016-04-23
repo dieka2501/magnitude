@@ -23,6 +23,9 @@ class visitor extends Model
 	function add($data){
 		return visitor::insertGetId($data);
 	}
+	function edit_by_email($email,$data){
+		return visitor::where('email',$email)->update($data);
+	}
 	function get_id($id){
 		return visitor::where($this->primaryKey,$id)->first();
 	}

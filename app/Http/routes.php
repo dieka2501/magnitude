@@ -12,7 +12,7 @@
 */
 
 Route::get('/', ['middleware'=>'auth',function () {
-    return view('welcome');
+    redirect('/login');
         // return 'Hello World';
 }]);
 //LOGIN
@@ -50,4 +50,8 @@ Route::get('/admin/visitor/history/{id}', 'visitorController@history');
 //UPLOAD EXCEL
 Route::post('/visitor/excel', 'excelController@index');
 
+Route::get('/verify/email', 'verifyController@index');
+Route::post('/verify/do', 'verifyController@store');
 
+//PDF
+Route::get('/test/pdf', 'tesController@index');
