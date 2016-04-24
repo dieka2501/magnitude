@@ -11,6 +11,7 @@ class visitor extends Model
 	function get_page(){
 		return visitor::orderBy('id','DESC')->paginate(20);
 	}
+
 	function get_nama($nama){
 		return visitor::where('nama_visitor','like',$nama)->first();
 	}

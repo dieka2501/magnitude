@@ -14,7 +14,7 @@ class excelController extends Controller
         date_default_timezone_set('Asia/Jakarta');
         $this->visitor = new visitor;
         $this->curl    = new curl;
-        $this->url     = "http://localhost/mailblast/public/api/receiver/create";
+        $this->url     = config('app.url_mailblast')."public/api/receiver/create";
     }
     /**
      * Display a listing of the resource.
@@ -31,7 +31,7 @@ class excelController extends Controller
             if($ext == 'xls' || $ext == 'xlsx'){
                 if($files->move($path,$filename)){
                     Excel::filter('chunk')->load($path.$filename)->chunk(200,function($result){
-                        var_dump($result);die;
+                        // var_dump($result);die;
                         foreach ($result as $res) {
                             $nama                   = ($res->nama != null)?$res->nama : "";
                             $perusahaan             = ($res->perusahaan != null)?$res->perusahaan : "";
@@ -49,30 +49,39 @@ class excelController extends Controller
                             
                             if(true){
                                 if((count($this->visitor->get_email($email))==0 && count($this->visitor->get_phone($phone))==0) || ($email == "" || $phone == "") ){
-                                    if( true ){
+                                    if(is_string(filter_var($email,FILTER_VALIDATE_EMAIL))){
                                         $insert['nama_visitor']         = str_replace([",","/",'"'], "",$nama);
                                         $insert['perusahaan']           = str_replace([",","/",'"'], "",$perusahaan);
                                         $insert['jabatan']              = str_replace([",","/",'"'], "",$jabatan);
                                         $insert['purpose']              = str_replace([",","/",'"'], "",$tujuan);
                                         $insert['nature_business']      = str_replace([",","/",'"'], "",$nature_business);
                                         $insert['email']                = $email;
-                                        // $insert['region']               = str_replace([",","/",'"'], "",$region);
-                                        // $insert['country']              = str_replace([",","/",'"'], "",$country);
-                                        // $insert['phone']                = str_replace([",","/",'"'], "",$phone);
-                                        // $insert['alamat']               = str_replace([",","/",'"'], "",$alamat);
-                                        // $insert['bidang']               = str_replace([",","/",'"'], "",$bidang);
-                                        // $insert['interest_product']     = str_replace([",","/",'"'], "",$interest_product);
-                                        // $insert['source_information']   = str_replace([",","/",'"'], "",$source_information);
+                                        $insert['region']               = str_replace([",","/",'"'], "",$region);
+                                        $insert['country']              = str_replace([",","/",'"'], "",$country);
+                                        $insert['phone']                = str_replace([",","/",'"'], "",$phone);
+                                        $insert['alamat']               = str_replace([",","/",'"'], "",$alamat);
+                                        $insert['bidang']               = str_replace([",","/",'"'], "",$bidang);
+                                        $insert['interest_product']     = str_replace([",","/",'"'], "",$interest_product);
+                                        $insert['source_information']   = str_replace([",","/",'"'], "",$source_information);
                                         $insert['created_at']           = date('Y-m-d H:i:s');
-                                        echo $nama."<br>";
+                                        // echo $nama."<br>";
                                         $ids = $this->visitor->add($insert);
                                         // $ids = 0;
                                         if($ids > 0){
-                                            $json['name']       = $nama;
-                                            $json['email']      = $email;
-                                            $json['region']     = $region;
-                                            $encode             = json_encode($json);
-                                            // $this->curl->post($this->url,$encode);
+                                            $curl['name']                   = $insert['nama_visitor'];
+                                            $curl['email']                  = $insert['perusahaan'];
+                                            $curl['region']                 = $insert['region'];
+                                            $curl['position']               = $insert['jabatan'];
+                                            $curl['country']                = $insert['country'];
+                                            $curl['lob']                    = $insert['bidang'];
+                                            $curl['interest_product']       = $insert['interest_product'];
+                                            $curl['purpose']                = $insert['purpose'];
+                                            $curl['phone']                  = $insert['phone'];
+                                            $curl['source']                 = $insert['source_information'];
+                                            $curl['address']                = $insert['alamat'];
+                                            $curl['company']                = $insert['perusahaan'];
+                                            $encode             = json_encode($curl);
+                                            $this->curl->post($this->url,$encode);
 
                                         }
                                     }
@@ -81,7 +90,7 @@ class excelController extends Controller
                         }
                     });
                     $request->session()->flash('notip','Data berhasil diupload.');
-                    // return redirect('admin/visitor');        
+                    return redirect('admin/visitor');        
                 }else{
                     $request->session()->flash('notip','Error dalam upload file, silakan ulangi.');
                     return redirect('admin/visitor');        

@@ -55,3 +55,6 @@ Route::post('/verify/do', 'verifyController@store');
 
 //PDF
 Route::get('/test/pdf', 'tesController@index');
+
+//Thanks Today
+Route::get('/email/thanks', 'emailController@index');

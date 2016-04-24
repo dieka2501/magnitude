@@ -70,13 +70,13 @@
     	-webkit-border-radius: 10px;
     	-moz-border-radius: 10px;">
 	  		<div class="content" style="padding: 20px;">
-	  			<h4>Terima Kasih Telah Melakukan Verifikasi Email</h4>
+	  			<h4>Terima Kasih Telah Hadir</h4>
 	  			<p style="font-size: 11px;
     	color: #555555;">Halo <?php echo $name?>,</p>
 	  			<p style="font-size: 11px;
-    	color: #555555;">Kami telah mencatat anda sebagai peserta <i>technical meeting</i> IndoBuildTech 2016.</p>
+    	color: #555555;">Terima kasih telah menghadiri acara <i>Technical Meeting</i> untuk pameran IndoBuildTech 2016.</p>
 	  			<p style="font-size: 11px;
-    	color: #555555;">Silahkan cetak file yang kami sertakan, dan bawa ke acara, sebagai tiket masuk.</p>
+    	color: #555555;"></p>
 	  			<div class="details" style="background: #E9F0FA;
     	padding: 20px;">
 	  				
