@@ -58,3 +58,6 @@ Route::get('/test/pdf', 'tesController@index');
 
 //Thanks Today
 Route::get('/email/thanks', 'emailController@index');
+
+//Not Coming
+Route::get('/email/missyu', 'emailController@not_coming');

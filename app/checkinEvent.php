@@ -3,7 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-
+use DB;
 class checkinEvent extends Model
 {
 	protected $table 		= "checkin_event";
@@ -16,6 +16,9 @@ class checkinEvent extends Model
 	}
 	function get_checkin_today(){
 		return checkinEvent::where('date_checkin','like','%'.date('Y-m-d').'%')->get();
+	}
+	function get_not_checkin(){
+		return checkinEvent::select(DB::raw('*,profile_visitor.id as id_pengunjung'))->join('profile_visitor','checkin_event.id_visitor','=','profile_visitor.id','right')->where('checkin_event.id_visitor',NULL)->get();
 	}
     //
 }

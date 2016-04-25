@@ -26,16 +26,35 @@ class emailController extends Controller
         $getce = $this->ce->get_checkin_today();
         foreach ($getce as $ces) {
             $getvisitor         = $this->visitor->get_id($ces->id_visitor);
-            $detail['name']     = $getvisitor->nama_visitor;
-            Mail::send('mail.thanks',$detail,function($m) use ($getvisitor){
-                $m->from('no-reply@indobuildtech')
-                    ->to($getvisitor->email,$getvisitor->nama_visitor)
-                    ->subject('Terima Kasih Atas Kedatangannya');
-            });
+            if(filter_var($getvisitor->email,FILTER_VALIDATE_EMAIL)){
+                $detail['name']     = $getvisitor->nama_visitor;
+                echo $getvisitor->nama_visitor."<br>";
+                Mail::send('mail.thanks',$detail,function($m) use ($getvisitor){
+                    $m->from('no-reply@indobuildtech')
+                        ->to($getvisitor->email,$getvisitor->nama_visitor)
+                        ->subject('Terima Kasih Atas Kedatangannya');
+                });
+            }
         }
         //
     }
 
+    function not_coming(){
+        $getce = $this->ce->get_not_checkin();
+        foreach ($getce as $ces) {
+            $getvisitor         = $this->visitor->get_id($ces->id_pengunjung);
+            if(filter_var($getvisitor->email,FILTER_VALIDATE_EMAIL)){
+                $detail['name']     = $getvisitor->nama_visitor;
+                echo $getvisitor->nama_visitor."<br>";
+                Mail::send('mail.thanks',$detail,function($m) use ($getvisitor){
+                    $m->from('no-reply@indobuildtech')
+                        ->to($getvisitor->email,$getvisitor->nama_visitor)
+                        ->subject('Anda melewatkan hari ini, semoga anda dalam keadaan baik.');
+                });    
+            }
+               
+        }
+    }
     /**
      * Show the form for creating a new resource.
      *
