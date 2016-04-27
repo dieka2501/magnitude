@@ -47,6 +47,9 @@ Route::get('/dashboard', 'sellerController@index');
 Route::get('/admin/visitor', 'visitorController@index');
 Route::get('/admin/visitor/history/{id}', 'visitorController@history');
 
+// ADMIN List Check in
+Route::get('/admin/event/checkin', 'checkinEventController@index');
+
 //UPLOAD EXCEL
 Route::post('/visitor/excel', 'excelController@index');
 

@@ -20,5 +20,8 @@ class checkinEvent extends Model
 	function get_not_checkin(){
 		return checkinEvent::select(DB::raw('*,profile_visitor.id as id_pengunjung'))->join('profile_visitor','checkin_event.id_visitor','=','profile_visitor.id','right')->where('checkin_event.id_visitor',NULL)->get();
 	}
+	function get_join_visitor_page(){
+		return checkinEvent::join('profile_visitor',$this->table.'.id_visitor','=','profile_visitor.id')->paginate(20);
+	}
     //
 }
