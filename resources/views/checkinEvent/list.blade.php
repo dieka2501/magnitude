@@ -62,6 +62,7 @@
                                 <th>Company</th>
                                 <th>Line Of Business</th>
                                 <th>Region</th>
+                                <th>Gate</th>
                                 <th>Date Check In</th>
                                 <th>History</th>
                             </tr>
@@ -96,6 +97,7 @@
                                 <td>{{$lists->perusahaan}}</td>
                                 <td>{{$lists->bidang}}</td>
                                 <td>{{$lists->region}}</td>
+                                <td>{{$lists->gate}}</td>
                                 <td>{{$lists->date_checkin}}</td>
                                 <td><a href="{{Config::get('app.url')}}public/admin/visitor/history/{{$lists->id_visitor}}" class="btn btn-sm btn-warning">History</a></td>
                             </tr>

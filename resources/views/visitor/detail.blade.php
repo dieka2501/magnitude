@@ -113,13 +113,15 @@
                                 <thead>
                                     <tr>
                                         <th>Check-in Date</th>
+                                        <th>Gate</th>
                                         <th>Region/City</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                 @foreach($event as $events)
                                     <tr>
-                                        <td>{!!date('d F Y',strtotime($events->date_checkin))!!}</td>
+                                        <td>{!!date('d F Y H:i:s',strtotime($events->date_checkin))!!}</td>
+                                        <td>{!!$events->gate!!}</td>
                                         <td>{!!$events->nama_kota!!}</td>
                                     </tr>
                                 @endforeach

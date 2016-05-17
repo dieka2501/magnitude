@@ -64,3 +64,12 @@ Route::get('/email/thanks', 'emailController@index');
 
 //Not Coming
 Route::get('/email/missyu', 'emailController@not_coming');
+
+//Import position Excel
+Route::post('/position/excel', 'positionController@import_xls');
+
+//Import Source Information Excel
+Route::post('/info/excel', 'sourceInfoController@import_xls');
+
+//Import Business Excel
+Route::post('/business/excel', 'businessController@import_xls');
