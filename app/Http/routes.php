@@ -73,3 +73,5 @@ Route::post('/info/excel', 'sourceInfoController@import_xls');
 
 //Import Business Excel
 Route::post('/business/excel', 'businessController@import_xls');
+
+Route::get('/jadwal', 'jadwalController@index');
