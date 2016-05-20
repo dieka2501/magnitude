@@ -12,6 +12,9 @@ class visitor extends Model
 		return visitor::orderBy('id','DESC')->paginate(20);
 	}
 
+	function get_all(){
+		return visitor::all();
+	}
 	function get_nama($nama){
 		return visitor::where('nama_visitor','like',$nama)->first();
 	}

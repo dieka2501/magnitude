@@ -26,7 +26,7 @@
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
 
-                    <h5>List Visitor </h5>
+                    <h5>List Visitor Check In </h5>
                     <div class="ibox-tools">
 
                         <!-- <a class="collapse-link">
@@ -47,7 +47,13 @@
                     </div>
                 </div>
                 <div class="ibox-content">
-                    
+                    <div class="container"> 
+                        <div class="row">
+                            <div class="col-md-11 text-right">
+                                <a href="{!!config('app.url')!!}public/export/checkin" class="btn btn-primary">Export To Excel</a>
+                            </div>
+                        </div>
+                    </div>
                     
                     <div class="table-responsive">
                         <p>{{session('alert')}}</p>

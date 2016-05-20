@@ -23,5 +23,11 @@ class checkinEvent extends Model
 	function get_join_visitor_page(){
 		return checkinEvent::join('profile_visitor',$this->table.'.id_visitor','=','profile_visitor.id')->paginate(20);
 	}
+	function get_all(){
+		return checkinEvent::all();
+	}
+	function get_all_join_visitor(){
+		return checkinEvent::join('profile_visitor',$this->table.'.id_visitor','=','profile_visitor.id')->get();
+	}
     //
 }

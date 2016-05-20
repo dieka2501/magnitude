@@ -104,8 +104,11 @@
 
                     </div>
                     <div class="row">
-                        <div class="col-md-12 text-left">
+                        <div class="col-md-6 text-left">
                             <button class="btn btn-primary">Search</button>
+                        </div>
+                        <div class="col-md-6 text-right">
+                            <a href="{!!config('app.url')!!}public/export/visitor" class="btn btn-success" type="button">Export To Excel</a>
                         </div>
                     </div>
                     </form>

@@ -7,6 +7,7 @@ use Excel;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\visitor;
+use App\checkinEvent;
 use App\curl;
 class excelController extends Controller
 {
@@ -14,6 +15,7 @@ class excelController extends Controller
         date_default_timezone_set('Asia/Jakarta');
         $this->visitor = new visitor;
         $this->curl    = new curl;
+        $this->ce      = new checkinEvent;
         $this->url     = config('app.url_mailblast')."public/api/receiver/create";
     }
     /**
@@ -105,6 +107,73 @@ class excelController extends Controller
         }
         //
     }
+
+    function eksport_checkin(){
+        $getdata = $this->ce->get_all_join_visitor();
+        if(count($getdata) >0){
+            $checkindata        = [];
+            foreach ($getdata as $datas) {
+                $checkindata[] = array('Visitor Name'=>$datas->nama_visitor,
+                                        'Company'=>$datas->perusahaan,
+                                        'Position'=>$datas->jabatan,
+                                        'Email'=>$datas->email,
+                                        'Purpose'=>$datas->purpose,
+                                        'Country'=>$datas->country,
+                                        'Region/City'=>$datas->region,
+                                        'Phone'=>$datas->phone,
+                                        'Address'=>$datas->alamat,
+                                        'Line Of Business'=>$datas->bidang,
+                                        'Interest Product'=>$datas->interest_product,
+                                        'Source Of Information'=>$datas->source_information,
+                                        'Date And Time Check In'=>$datas->date_checkin,
+                                        'Gate'=>$datas->gate);
+            }
+            $checkindata[]      = array('Total Visitor Check In',count($getdata));
+            Excel::create('visitor_checkin',function($excel) use ($checkindata){
+                $excel->sheet('Visitor Check In',function($sheet) use ($checkindata){
+                    // var_dump($excel);die;
+                    $sheet->fromArray($checkindata);    
+                });
+                
+            })->download('xlsx');
+            Session::flash('notip',"<div class='alert alert-success'>Export Data Check In Berhasil.</div>");
+            return redirect('/admin/event/checkin');   
+        }
+        
+    }
+
+    function export_visitor(){
+        $getdata = $this->visitor->get_all();
+        if(count($getdata) >0){
+            $checkindata        = [];
+            foreach ($getdata as $datas) {
+                $checkindata[] = array('Visitor Name'=>$datas->nama_visitor,
+                                        'Company'=>$datas->perusahaan,
+                                        'Position'=>$datas->jabatan,
+                                        'Email'=>$datas->email,
+                                        'Purpose'=>$datas->purpose,
+                                        'Country'=>$datas->country,
+                                        'Region/City'=>$datas->region,
+                                        'Phone'=>$datas->phone,
+                                        'Address'=>$datas->alamat,
+                                        'Line Of Business'=>$datas->bidang,
+                                        'Interest Product'=>$datas->interest_product,
+                                        'Source Of Information'=>$datas->source_information
+                                        );
+            }
+            $checkindata[]      = array('Total Visitor',count($getdata));
+            Excel::create('visitor',function($excel) use ($checkindata){
+                $excel->sheet('Visitor',function($sheet) use ($checkindata){
+                    // var_dump($excel);die;
+                    $sheet->fromArray($checkindata);    
+                });
+                
+            })->download('xlsx');
+            Session::flash('notip',"<div class='alert alert-success'>Export Data Check In Berhasil.</div>");
+            return redirect('/admin/visitor');   
+        }
+    }
+
 
     /**
      * Show the form for creating a new resource.
