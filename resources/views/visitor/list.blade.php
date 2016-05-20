@@ -125,6 +125,7 @@
                                 <th>Company</th>
                                 <th>Line Of Business</th>
                                 <th>Region</th>
+                                <th>Date Register</th>
                                 <th>History</th>
                             </tr>
                             </thead>
@@ -158,6 +159,7 @@
                                 <td>{{$lists->perusahaan}}</td>
                                 <td>{{$lists->bidang}}</td>
                                 <td>{{$lists->region}}</td>
+                                <td>{{$lists->created_at}}</td>
                                 <td><a href="{{Config::get('app.url')}}public/admin/visitor/history/{{$lists->id}}" class="btn btn-sm btn-warning">History</a></td>
                             </tr>
                             @endforeach()
