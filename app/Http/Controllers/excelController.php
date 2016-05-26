@@ -158,7 +158,8 @@ class excelController extends Controller
                                         'Address'=>$datas->alamat,
                                         'Line Of Business'=>$datas->bidang,
                                         'Interest Product'=>$datas->interest_product,
-                                        'Source Of Information'=>$datas->source_information
+                                        'Source Of Information'=>$datas->source_information,
+                                        'Date Register' => date('d F Y H:i:s',strtotime($datas->created_at))
                                         );
             }
             $checkindata[]      = array('Total Visitor',count($getdata));
