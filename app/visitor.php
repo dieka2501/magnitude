@@ -8,6 +8,9 @@ class visitor extends Model
 {
 	protected $table = "profile_visitor";
 	protected $primaryKey = "id";
+	function __construct(){
+		date_default_timezone_set('Asia/Jakarta');
+	}
 	function get_page(){
 		return visitor::orderBy('id','DESC')->paginate(20);
 	}
@@ -71,6 +74,9 @@ class visitor extends Model
 	}
 	function get_count(){
 		return visitor::count();
+	}
+	function get_visitor_today(){
+		return visitor::where('created_at','like','%'.date('Y-m-d').'%')->get();
 	}
     //
 }

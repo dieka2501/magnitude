@@ -6,11 +6,15 @@ use Illuminate\Http\Request;
 use Auth;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\visitor;
+use App\checkinEvent;
 
 class dashboardController extends Controller
 {
     function __construct(){
         $this->middleware('auth');
+        $this->visitor = new visitor;
+        $this->checkin = new checkinEvent;
     }
     /**
      * Display a listing of the resource.
@@ -24,7 +28,18 @@ class dashboardController extends Controller
 
     public function indexadmin()
     {
-        $view['role'] = session('role');
+        $get_visitor        = count($this->visitor->get_visitor_today()); 
+        $get_hall1          = count($this->checkin->get_checkin_today_hall1()); 
+        $get_nusantara      = count($this->checkin->get_checkin_today_nusantara()); 
+        $get_hall7          = count($this->checkin->get_checkin_today_hall7()); 
+        $get_hall10         = count($this->checkin->get_checkin_today_hall10()); 
+
+        $view['role']          = session('role');
+        $view['visitor']       = $get_visitor;
+        $view['hall1']         = $get_hall1;
+        $view['nusantara']     = $get_nusantara;
+        $view['hall7']         = $get_hall7;
+        $view['hall10']        = $get_hall10;
         return view('dashboard.indexadmin',$view);
     }
 

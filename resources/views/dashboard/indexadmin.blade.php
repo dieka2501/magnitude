@@ -57,30 +57,30 @@
                     
                 </div>
                 <div class="table-responsive">
-                    <!-- <table class="table table-striped">
+                    <table class="table table-striped">
                         <thead>
                         <tr>
 
-                            <th>No</th>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Alamat</th>
-                            <th>Phone</th>
-                            <th>Action</th>
+                            <th>Total Visitor</th>
+                            <th>Check In Hall 1</th>
+                            <th>Check In Nusantara</th>
+                            <th>Check In Hall 7</th>
+                            <th>Check In Hall 10</th>
+                            
                         </tr>
                         </thead>
                         <tbody>
                         
                         <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                            <td>{{$visitor}}</td>
+                            <td>{{$hall1}}</td>
+                            <td>{{$nusantara}}</td>
+                            <td>{{$hall7}}</td>
+                            <td>{{$hall10}}</td>
                         </tr>
                         
                         </tbody>
-                    </table> -->
+                    </table>
                     
                 </div>
 
