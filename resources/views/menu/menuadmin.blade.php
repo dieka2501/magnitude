@@ -26,7 +26,7 @@
                     <a href="{!!config('app.url')!!}public/admin/visitor"><i class="fa fa-diamond"></i> <span class="nav-label">Visitor</span></a>
                 </li>
                 <li>
-                    <a href="{!!config('app.url')!!}public/admin/event/checkin"><i class="fa fa-diamond"></i> <span class="nav-label">Cehck In List</span></a>
+                    <a href="{!!config('app.url')!!}public/admin/event/checkin"><i class="fa fa-diamond"></i> <span class="nav-label">Check In List</span></a>
                 </li>
                 <!-- <li>
                     <a href="#"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">Graphs</span><span class="fa arrow"></span></a>
