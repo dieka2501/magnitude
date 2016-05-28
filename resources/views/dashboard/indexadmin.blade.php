@@ -74,7 +74,7 @@
                         
                         <tr>
                             <td>{{$visitor}}</td>
-                            <td>{{$total_checkin}}</td>
+                            <td>{{$checkin}}</td>
                             <td>{{$hall1}}</td>
                             <td>{{$nusantara}}</td>
                             <td>{{$hall7}}</td>
