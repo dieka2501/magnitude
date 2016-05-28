@@ -1,7 +1,7 @@
 <ul class="nav metismenu" id="side-menu">
                 <li class="nav-header">
                     <div class="dropdown profile-element"> <span>
-                            <img alt="image" class="img-circle" src="" />
+                            <img alt="image" class="" src="img/ibt.jpg" width="100"  />
                              </span>
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                             <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">Dikdik Kusdinar</strong>

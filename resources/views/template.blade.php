@@ -54,7 +54,7 @@
                         <li>
                             <div class="dropdown-messages-box">
                                 <a href="profile.html" class="pull-left">
-                                    <img alt="image" class="img-circle" src="">
+                                    <img alt="image" class="img-circle" src="/public/img/ibt.jpg">
                                 </a>
                                 <div class="media-body">
                                     <small class="pull-right">46h ago</small>
