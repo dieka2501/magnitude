@@ -33,9 +33,10 @@ class dashboardController extends Controller
         $get_nusantara      = count($this->checkin->get_checkin_today_nusantara()); 
         $get_hall7          = count($this->checkin->get_checkin_today_hall7()); 
         $get_hall10         = count($this->checkin->get_checkin_today_hall10()); 
-
+        $total_checkin      = count($this->checkin->get_checkin_today());
         $view['role']          = session('role');
         $view['visitor']       = $get_visitor;
+        $view['checkin']       = $total_checkin;
         $view['hall1']         = $get_hall1;
         $view['nusantara']     = $get_nusantara;
         $view['hall7']         = $get_hall7;

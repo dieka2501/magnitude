@@ -62,6 +62,7 @@
                         <tr>
 
                             <th>Total Visitor</th>
+                            <th>Total Check In</th>
                             <th>Check In Hall 1</th>
                             <th>Check In Nusantara</th>
                             <th>Check In Hall 7</th>
@@ -73,6 +74,7 @@
                         
                         <tr>
                             <td>{{$visitor}}</td>
+                            <td>{{$total_checkin}}</td>
                             <td>{{$hall1}}</td>
                             <td>{{$nusantara}}</td>
                             <td>{{$hall7}}</td>
