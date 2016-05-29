@@ -56,6 +56,14 @@
                     </div>
                     
                 </div>
+                <div class="row">
+                    <div class='col-md-6'>
+                        <div id="checkin">
+                            
+                        </div>
+                    </div>
+                    <div class='col-md-6'></div>
+                </div>
                 <div class="table-responsive">
                     <table class="table table-striped">
                         <thead>
@@ -92,5 +100,26 @@
 </div> 
   
 </div>
-  
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+      google.charts.load("current", {packages:["corechart"]});
+      google.charts.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['GATE', 'Total Check In'],
+          ['Hall 1',     {{$hall1}}],
+          ['Nusantara',      {{$nusantara}}],
+          ['Hall 7',  {{$hall7}}],
+          ['Hall 10', {{$hall10}}]
+        ]);
+
+        var options = {
+          title: 'Total Check In Per Gate',
+          is3D: true,
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('checkin'));
+        chart.draw(data, options);
+      }
+    </script>
 @endsection('content')
