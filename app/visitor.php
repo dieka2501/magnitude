@@ -124,12 +124,12 @@ class visitor extends Model
 			}
 			$sqlcountry 	.= ") AND ";	
 		}
-		
-		if($lob[0]!=""){
+		// var_dump($lob[0] != "");die;
+		if($lob[0] != ""){
 			$clob 	 		= count($lob);
 			$sqllob 		= "(";
 			for ($cacahlob=0; $cacahlob < $clob; $cacahlob++) { 
-				if(isset($country[$cacahlob+1])){
+				if(isset($lob[$cacahlob+1])){
 					$sqllob 	.= "`bidang` like '%".$lob[$cacahlob]."%' OR ";		
 				}else{
 					$sqllob 	.= "`bidang` like '%".$lob[$cacahlob]."%'";
@@ -176,7 +176,7 @@ class visitor extends Model
 		
 
 		
-		if($source !=  ""){
+		if($source != ""){
 			$expsource 		= explode(',', $source);
 			$csource 		= count($expsource);
 			$sqlsource 		= "(";
@@ -227,6 +227,10 @@ class visitor extends Model
 	function get_top_region(){
 		return visitor::select(DB::raw('COUNT(*) as jumlah, `region`'))->whereRaw("`region`!='0' AND `region`!= ''")
 				->groupBy('region')->orderBy('jumlah','DESC')->take(5)->get();
+	}
+	function get_top_lob(){
+		return visitor::select(DB::raw('COUNT(*) as jumlah, `bidang`'))->whereRaw("`bidang`!='0' AND `bidang`!= ''")
+				->groupBy('bidang')->orderBy('jumlah','DESC')->take(5)->get();
 	}
     //
 }

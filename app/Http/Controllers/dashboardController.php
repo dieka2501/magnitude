@@ -34,12 +34,14 @@ class dashboardController extends Controller
         // $get_visitor        = count($this->visitor->get_visitor_today()); 
         $pos = 0;
         $reg = 0;
+        $lob = 0;
         $get_hall1          = count($this->checkin->get_checkin_all_hall1()); 
         $get_nusantara      = count($this->checkin->get_checkin_all_nusantara()); 
         $get_hall7          = count($this->checkin->get_checkin_all_hall7()); 
         $get_hall10         = count($this->checkin->get_checkin_all_hall10()); 
         $get_top_pos        = $this->visitor->get_top_position();
         $get_top_region     = $this->visitor->get_top_region();
+        $get_top_lob        = $this->visitor->get_top_lob();
         // $total_checkin      = count($this->checkin->get_checkin_today());
         $view['role']          = session('role');
         // $view['visitor']       = $get_visitor;
@@ -52,6 +54,11 @@ class dashboardController extends Controller
             $view['top_reg_jumlah'.$reg]       = $top_region->jumlah;
             $view['top_reg'.$reg]              = $top_region->region;
             $reg++;
+        }
+        foreach ($get_top_lob as $top_lob) {
+            $view['top_lob_jumlah'.$lob]       = $top_lob->jumlah;
+            $view['top_lob'.$lob]              = $top_lob->bidang;
+            $lob++;
         }
         
         $view['hall1']         = $get_hall1;

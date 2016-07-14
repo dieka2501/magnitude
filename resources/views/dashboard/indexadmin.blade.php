@@ -27,7 +27,7 @@
                 <h5>Dashboard Admin </h5>
                 <div class="ibox-tools">
                     <a class="collapse-link">
-                        <i class="fa fa-chevron-up"></i>
+                        <!-- <i class="fa fa-chevron-up"></i> -->
                     </a>
                     <!-- <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                         <i class="fa fa-wrench"></i>
@@ -57,8 +57,13 @@
                     
                 </div>
                 <div class="row">
-                    <div class='col-md-12'>
+                    <div class='col-md-6'>
                         <div id="checkin">
+                            
+                        </div>
+                    </div>
+                    <div class='col-md-6'>
+                        <div id="top_lob">
                             
                         </div>
                     </div>
@@ -174,6 +179,28 @@
         };
 
         var chart = new google.visualization.PieChart(document.getElementById('top_reg'));
+        chart.draw(data, options);
+      }
+    </script>
+    <script type="text/javascript">
+      // google.charts.load("current", {packages:["corechart"]});
+      google.charts.setOnLoadCallback(drawChartTopLob);
+      function drawChartTopLob() {
+        var data = google.visualization.arrayToDataTable([
+          ['Line Of Business', 'Total Visitor'],
+          ["{{$top_lob0}}", {{$top_lob_jumlah0}}],
+          ["{{$top_lob1}}", {{$top_lob_jumlah1}}],
+          ["{{$top_lob2}}", {{$top_lob_jumlah2}}],
+          ["{{$top_lob3}}", {{$top_lob_jumlah3}}],
+          ["{{$top_lob4}}", {{$top_lob_jumlah4}}],
+        ]);
+
+        var options = {
+          title: 'Top 5 Visitor Business',
+          is3D: true,
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('top_lob'));
         chart.draw(data, options);
       }
     </script>
