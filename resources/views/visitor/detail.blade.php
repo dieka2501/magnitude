@@ -129,21 +129,21 @@
                             </table>
                         </div>
                         <div class="col-md-6">
-                            <strong>Check-In Booth Region/City</strong>
+                            <strong>Log Time Registration</strong>
                             <table class="table">
                                 <thead>
                                     <tr>
-                                        <th>Check-in Date</th>
-                                        <th>Exibitor</th>
-                                        <th>Region/City</th>
+                                        <th>Time Start</th>
+                                        <th>Time End</th>
+                                        <th>Long Time</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($booth as $booths)
+                                @foreach($logtime as $logtimes)
                                     <tr>
-                                        <td>{!!date('d F Y',strtotime($booths->date_checkin))!!}</td>
-                                        <td>{!!$booths->nama_perusahaan!!}</td>
-                                        <td>{!!$booths->nama_kota!!}</td>
+                                        <td>{!!$logtimes->logtime_start!!}</td>
+                                        <td>{!!$logtimes->logtime_end!!}</td>
+                                        <td>{!!number_format($logtimes->selisih)!!} Second</td>
                                     </tr>
                                 @endforeach
                                 </tbody>

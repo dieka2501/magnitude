@@ -10,6 +10,7 @@ use App\visitor;
 use App\kategori;
 use App\checkinBooth;
 use App\checkinEvent;
+use App\logtime;
 
 class visitorController extends Controller
 {
@@ -18,6 +19,7 @@ class visitorController extends Controller
         $this->visitor      = new visitor;
         $this->ce           = new checkinEvent;
         $this->cb           = new checkinBooth;
+        $this->logtime      = new logtime;
         $this->kategori     = new kategori;
     }
     /**
@@ -37,7 +39,8 @@ class visitorController extends Controller
         $email             = $request->input('email');
         if($request->has('position') || $request->has('region') || $request->has('country') || $request->has('lob') || $request->has('interest_product') || $request->has('purpose') ||  $request->has('source') || $request->has('email') ){
             
-            $getvisitor                          = $this->visitor->get_search($position,$region,$country,$lob,$interest,$purpose,$source,$email);    
+            // $getvisitor                          = $this->visitor->get_search($position,$region,$country,$lob,$interest,$purpose,$source,$email);    
+            $getvisitor                          = $this->visitor->get_advance_filter($position,$region,$country,$lob,$interest,$purpose,$source,$email);    
             // var_dump($lob);
             // echo "satu";
         }else{
@@ -54,28 +57,28 @@ class visitorController extends Controller
         // var_dump($getjabatan);die;
         $arr_position['']                    = "All Position";
         foreach ($getjabatan as $jabatans) {
-            if($jabatans->jabatan != ""){
+            if($jabatans->jabatan != "" && $jabatans->jabatan != "0" && $jabatans->jabatan != "-" ){
                 $arr_position[strtolower($jabatans->jabatan)] = strtoupper($jabatans->jabatan);
             }
             
         }
         $arr_region                    = [''=>'All Region/City'];
         foreach ($getregion as $regions) {
-            if($regions->region != ""){
+            if($regions->region != "" && $regions->region != "0" && $regions->region != "-"){
                 $arr_region[strtolower($regions->region)] = strtoupper($regions->region);
             }
             
         }
         $arr_country                    = [''=>'All Country'];
         foreach ($getcountry as $countrys) {
-            if($countrys->country != ""){
+            if($countrys->country != "" && $countrys->country != "0" && $countrys->country != "-"){
                 $arr_country[strtolower($countrys->country)] = strtoupper($countrys->country);
             }
             
         }
         $arr_lob                    = [''=>'All Line Of Business'];
         foreach ($getlob as $lobs) {
-            if($lobs->bidang != ""){
+            if($lobs->bidang != "" && $lobs->bidang != "0" && $lobs->bidang != "-" ){
                 if(strpos($lobs->bidang, ",") != FALSE){
                     $explodebidang = explode(',', $lobs->bidang);
                     foreach ($explodebidang as $expbidang) {
@@ -126,10 +129,12 @@ class visitorController extends Controller
         $getvisitor             = $this->visitor->get_id($id);
         $event                  = $this->ce->get_idvisitor_all($id);
         $booth                  = $this->cb->get_idvisitor_all($id);
+        $logtime                = $this->logtime->get_idvisitor($id);
         $view['notip']          = session('notip');
         $view['visitor']        = $getvisitor;
         $view['event']          = $event;
         $view['booth']          = $booth;
+        $view['logtime']        = $logtime;
 
         return view('visitor.detail',$view);
     }

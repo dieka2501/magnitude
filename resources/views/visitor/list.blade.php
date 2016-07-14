@@ -68,22 +68,22 @@
                     <form method="GET" action="">
                     <div class="row">
                         <div class="col-md-4 m-b-xs">
-                            {!!Form::select('position',$arr_position,$position,['class'=>'form-control'])!!}
+                            {!!Form::select('position[]',$arr_position,$position,['class'=>'form-control','multiple'])!!}
                         </div>
                         <div class="col-md-4 m-b-xs">
-                            {!!Form::select('region',$arr_region,$region,['class'=>'form-control'])!!}
+                            {!!Form::select('region[]',$arr_region,$region,['class'=>'form-control','multiple'])!!}
                         </div>
                         <div class="col-md-4 m-b-xs">
-                            {!!Form::select('country',$arr_country,$country,['class'=>'form-control'])!!}
+                            {!!Form::select('country[]',$arr_country,$country,['class'=>'form-control','multiple'])!!}
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-4 m-b-xs">
-                             {!!Form::select('lob',$arr_lob,$lob,['class'=>'form-control'])!!}
+                             {!!Form::select('lob[]',$arr_lob,$lob,['class'=>'form-control','multiple'])!!}
                         </div>
                         <div class="col-md-4 m-b-xs">
                             
-                             {!!Form::select('interest_product',$arr_interest_product,$interest_product,['class'=>'form-control'])!!}
+                             {!!Form::select('interest_product[]',$arr_interest_product,$interest_product,['class'=>'form-control','multiple'])!!}
                     
                         </div>
                         <div class="col-md-4 m-b-xs">
