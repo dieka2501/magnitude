@@ -26,17 +26,34 @@ class dashboardController extends Controller
         //
     }
 
-    public function indexadmin()
+    public function indexadmin(Request $request)
     {
-        $get_visitor        = count($this->visitor->get_visitor_today()); 
-        $get_hall1          = count($this->checkin->get_checkin_today_hall1()); 
-        $get_nusantara      = count($this->checkin->get_checkin_today_nusantara()); 
-        $get_hall7          = count($this->checkin->get_checkin_today_hall7()); 
-        $get_hall10         = count($this->checkin->get_checkin_today_hall10()); 
-        $total_checkin      = count($this->checkin->get_checkin_today());
+        // View::share('username',session('username'));
+        view()->share('username', session('username'));
+        // var_dump($request->session()->all());
+        // $get_visitor        = count($this->visitor->get_visitor_today()); 
+        $pos = 0;
+        $reg = 0;
+        $get_hall1          = count($this->checkin->get_checkin_all_hall1()); 
+        $get_nusantara      = count($this->checkin->get_checkin_all_nusantara()); 
+        $get_hall7          = count($this->checkin->get_checkin_all_hall7()); 
+        $get_hall10         = count($this->checkin->get_checkin_all_hall10()); 
+        $get_top_pos        = $this->visitor->get_top_position();
+        $get_top_region     = $this->visitor->get_top_region();
+        // $total_checkin      = count($this->checkin->get_checkin_today());
         $view['role']          = session('role');
-        $view['visitor']       = $get_visitor;
-        $view['checkin']       = $total_checkin;
+        // $view['visitor']       = $get_visitor;
+        foreach ($get_top_pos as $top_pos) {
+            $view['top_pos_jumlah'.$pos]       = $top_pos->jumlah;
+            $view['top_pos'.$pos]              = $top_pos->jabatan;
+            $pos++;
+        }
+        foreach ($get_top_region as $top_region) {
+            $view['top_reg_jumlah'.$reg]       = $top_region->jumlah;
+            $view['top_reg'.$reg]              = $top_region->region;
+            $reg++;
+        }
+        
         $view['hall1']         = $get_hall1;
         $view['nusantara']     = $get_nusantara;
         $view['hall7']         = $get_hall7;

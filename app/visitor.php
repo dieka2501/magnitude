@@ -220,5 +220,13 @@ class visitor extends Model
 	function get_visitor_today(){
 		return visitor::where('created_at','like','%'.date('Y-m-d').'%')->get();
 	}
+	function get_top_position(){
+		return visitor::select(DB::raw('COUNT(*) as jumlah, `jabatan`'))->whereRaw("`jabatan`!='0' AND `jabatan`!= ''")
+				->groupBy('jabatan')->orderBy('jumlah','DESC')->take(3)->get();
+	}
+	function get_top_region(){
+		return visitor::select(DB::raw('COUNT(*) as jumlah, `region`'))->whereRaw("`region`!='0' AND `region`!= ''")
+				->groupBy('region')->orderBy('jumlah','DESC')->take(5)->get();
+	}
     //
 }

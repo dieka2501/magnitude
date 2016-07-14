@@ -32,14 +32,29 @@ class checkinEvent extends Model
 	function get_checkin_today_hall1(){
 		return checkinEvent::where('date_checkin','like','%'.date('Y-m-d').'%')->where('gate','like','Hall1')->get();
 	}
+	function get_checkin_all_hall1(){
+		return checkinEvent::where('gate','like','Hall1')->get();
+	}
+
 	function get_checkin_today_nusantara(){
 		return checkinEvent::where('date_checkin','like','%'.date('Y-m-d').'%')->where('gate','like','HallNusantara')->get();
 	}
+
+	function get_checkin_all_nusantara(){
+		return checkinEvent::where('gate','like','HallNusantara')->get();
+	}
+
 	function get_checkin_today_hall7(){
 		return checkinEvent::where('date_checkin','like','%'.date('Y-m-d').'%')->where('gate','like','Hall7')->get();
 	}
+	function get_checkin_all_hall7(){
+		return checkinEvent::where('gate','like','Hall7')->get();
+	}
 	function get_checkin_today_hall10(){
 		return checkinEvent::where('date_checkin','like','%'.date('Y-m-d').'%')->where('gate','like','Hall10')->get();
+	}
+	function get_checkin_all_hall10(){
+		return checkinEvent::where('gate','like','Hall10')->get();
 	}
     //
 }

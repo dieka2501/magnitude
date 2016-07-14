@@ -62,10 +62,22 @@
                             
                         </div>
                     </div>
+                </div>
+                <div class="row">
+                    <div class='col-md-6'>
+                        <div id="top_reg">
+                            
+                        </div>
+                    </div>
+                    <div class='col-md-6'>
+                        <div id="top_pos">
+                            
+                        </div>
+                    </div>
                     <!-- <div class='col-md-6'></div> -->
                 </div>
                 <div class="table-responsive">
-                    <table class="table table-striped">
+                    <!-- <table class="table table-striped">
                         <thead>
                         <tr>
 
@@ -81,16 +93,16 @@
                         <tbody>
                         
                         <tr>
-                            <td>{{$visitor}}</td>
-                            <td>{{$checkin}}</td>
-                            <td>{{$hall1}}</td>
-                            <td>{{$nusantara}}</td>
-                            <td>{{$hall7}}</td>
-                            <td>{{$hall10}}</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
                         </tr>
                         
                         </tbody>
-                    </table>
+                    </table> -->
                     
                 </div>
 
@@ -119,6 +131,49 @@
         };
 
         var chart = new google.visualization.PieChart(document.getElementById('checkin'));
+        chart.draw(data, options);
+      }
+    </script>
+
+    <script type="text/javascript">
+      // google.charts.load("current", {packages:["corechart"]});
+      google.charts.setOnLoadCallback(drawChartTopPos);
+      function drawChartTopPos() {
+        var data = google.visualization.arrayToDataTable([
+          ['Position', 'Total Visitor'],
+          ["{{$top_pos0}}", {{$top_pos_jumlah0}}],
+          ["{{$top_pos1}}", {{$top_pos_jumlah1}}],
+          ["{{$top_pos2}}", {{$top_pos_jumlah2}}]
+        ]);
+
+        var options = {
+          title: 'Top 3 Visitor Job Position',
+          is3D: true,
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('top_pos'));
+        chart.draw(data, options);
+      }
+    </script>
+    <script type="text/javascript">
+      // google.charts.load("current", {packages:["corechart"]});
+      google.charts.setOnLoadCallback(drawChartTopReg);
+      function drawChartTopReg() {
+        var data = google.visualization.arrayToDataTable([
+          ['Region', 'Total Visitor'],
+          ["{{$top_reg0}}", {{$top_reg_jumlah0}}],
+          ["{{$top_reg1}}", {{$top_reg_jumlah1}}],
+          ["{{$top_reg2}}", {{$top_reg_jumlah2}}],
+          ["{{$top_reg3}}", {{$top_reg_jumlah3}}],
+          ["{{$top_reg4}}", {{$top_reg_jumlah4}}],
+        ]);
+
+        var options = {
+          title: 'Top 5 Visitor Region/City',
+          is3D: true,
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('top_reg'));
         chart.draw(data, options);
       }
     </script>

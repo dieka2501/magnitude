@@ -35,10 +35,10 @@
         <div class="row border-bottom">
         <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
         <div class="navbar-header">
-            <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
+            <!-- <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a> -->
             <form role="search" class="navbar-form-custom" action="search_results.html">
                 <div class="form-group">
-                    <input type="text" placeholder="Search for something..." class="form-control" name="top-search" id="top-search">
+                    <!-- <input type="text" placeholder="Search for something..." class="form-control" name="top-search" id="top-search"> -->
                 </div>
             </form>
         </div>
@@ -177,10 +177,10 @@
         </div> -->
         <div class="footer">
             <div class="pull-right">
-                10GB of <strong>250GB</strong> Free.
+                <!-- 10GB of <strong>250GB</strong> Free. -->
             </div>
             <div>
-                <strong>Copyright</strong> Example Company &copy; 2014-2015
+                <strong>Copyright</strong> Data Driven Asia &copy; 2016
             </div>
         </div>
 

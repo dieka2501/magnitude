@@ -29,6 +29,7 @@ class visitorController extends Controller
      */
     public function index(Request $request)
     {
+        view()->share('username', session('username'));
         $position          = $request->input('position');
         $region            = $request->input('region');
         $country           = $request->input('country');
@@ -126,6 +127,7 @@ class visitorController extends Controller
      */
     public function history($id)
     {   
+        view()->share('username', session('username'));
         $getvisitor             = $this->visitor->get_id($id);
         $event                  = $this->ce->get_idvisitor_all($id);
         $booth                  = $this->cb->get_idvisitor_all($id);

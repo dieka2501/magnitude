@@ -4,7 +4,7 @@
                             <img alt="image" class="" src="img/ibt.jpg" width="100"  />
                              </span>
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                            <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">Dikdik Kusdinar</strong>
+                            <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">{!!$username!!}</strong>
                              </span> <span class="text-muted text-xs block">Data Driven Asia <b class="caret"></b></span> </span> </a>
                         <!-- <ul class="dropdown-menu animated fadeInRight m-t-xs">
                             <li><a href="profile.html">Profile</a></li>
