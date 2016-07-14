@@ -24,6 +24,7 @@ class checkinEventController extends Controller
     public function index(Request $request)
     {
 
+        view()->share('username', session('username'));
         $getpage = $this->ce->get_join_visitor_page();
         $view['list']       = $getpage;
         $view['notip']      = session('notip');
