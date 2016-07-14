@@ -2,13 +2,13 @@
 @section('content')
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
-        <h2>Visitor</h2>
+        <h2>Check In Visitor</h2>
         <ol class="breadcrumb">
             <li>
                 <a href="{{Config::get('app.url')}}public/admin">Home</a>
             </li>
             <li>
-                <a href="{{Config::get('app.url')}}public/admin/visitor">Visitor</a>
+                <a href="{{Config::get('app.url')}}public/admin/visitor">Check In Visitor</a>
             </li>
             <li class="active">
                 <strong>List</strong>
