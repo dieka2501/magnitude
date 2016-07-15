@@ -29,9 +29,13 @@ class dashboardController extends Controller
     public function indexadmin(Request $request)
     {
         // View::share('username',session('username'));
-        view()->share('username', session('username'));
+        
         // var_dump($request->session()->all());
         // $get_visitor        = count($this->visitor->get_visitor_today()); 
+        $date_reg           = date_create(session('date_register'));
+        $valid_until        = session('valid_until');
+        date_add($date_reg,date_interval_create_from_date_string($valid_until.' days'));
+        $date_exp   = date_format($date_reg,'d F Y');
         $pos = 0;
         $reg = 0;
         $lob = 0;
@@ -65,6 +69,8 @@ class dashboardController extends Controller
         $view['nusantara']     = $get_nusantara;
         $view['hall7']         = $get_hall7;
         $view['hall10']        = $get_hall10;
+        view()->share('date_exp', $date_exp);
+        view()->share('username', session('username'));
         return view('dashboard.indexadmin',$view);
     }
 

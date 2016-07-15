@@ -23,12 +23,16 @@ class checkinEventController extends Controller
      */
     public function index(Request $request)
     {
-
-        view()->share('username', session('username'));
+        $date_reg           = date_create(session('date_register'));
+        $valid_until        = session('valid_until');
+        date_add($date_reg,date_interval_create_from_date_string($valid_until.' days'));
+        $date_exp   = date_format($date_reg,'d F Y');
         $getpage = $this->ce->get_join_visitor_page();
         $view['list']       = $getpage;
         $view['notip']      = session('notip');
         $view['datacount']  = 0;
+        view()->share('username', session('username'));
+        view()->share('date_exp', $date_exp);
         return view('checkinEvent.list',$view);
         //
     }

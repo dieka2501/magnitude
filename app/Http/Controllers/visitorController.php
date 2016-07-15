@@ -29,7 +29,11 @@ class visitorController extends Controller
      */
     public function index(Request $request)
     {
-        view()->share('username', session('username'));
+        $date_reg           = date_create(session('date_register'));
+        $valid_until        = session('valid_until');
+        date_add($date_reg,date_interval_create_from_date_string($valid_until.' days'));
+        $date_exp   = date_format($date_reg,'d F Y');
+        
         $position          = $request->input('position');
         $region            = $request->input('region');
         $country           = $request->input('country');
@@ -116,6 +120,8 @@ class visitorController extends Controller
         $view['source']                      = $source; 
         $view['email']                       = $email; 
         $view['datacount']                   = $this->visitor->get_count(); 
+        view()->share('username', session('username'));
+        view()->share('date_exp', $date_exp);
         return view('visitor.list',$view);
         //
     }
@@ -127,7 +133,11 @@ class visitorController extends Controller
      */
     public function history($id)
     {   
-        view()->share('username', session('username'));
+        $date_reg           = date_create(session('date_register'));
+        $valid_until        = session('valid_until');
+        date_add($date_reg,date_interval_create_from_date_string($valid_until.' days'));
+        $date_exp   = date_format($date_reg,'d F Y');
+        
         $getvisitor             = $this->visitor->get_id($id);
         $event                  = $this->ce->get_idvisitor_all($id);
         $booth                  = $this->cb->get_idvisitor_all($id);
@@ -137,7 +147,8 @@ class visitorController extends Controller
         $view['event']          = $event;
         $view['booth']          = $booth;
         $view['logtime']        = $logtime;
-
+        view()->share('date_exp', $date_exp);
+        view()->share('username', session('username'));
         return view('visitor.detail',$view);
     }
 

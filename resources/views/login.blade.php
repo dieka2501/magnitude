@@ -29,7 +29,7 @@
             <p>Show Your Data.
                 <!--Continually expanded and constantly improved Inspinia Admin Them (IN+)-->
             </p>
-            <p>{{$alert}}</p>
+            <p>{!!$alert!!}</p>
             <p>Login in. To see it in action.</p>
             <form class="m-t" role="form" method='POST' action="{{Config::get('app.url')}}public/login">
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
