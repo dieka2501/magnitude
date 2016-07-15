@@ -108,7 +108,9 @@
                             <button class="btn btn-primary">Search</button>
                         </div>
                         <div class="col-md-6 text-right">
+                            @if($username != 'admin1week')
                             <a href="{!!config('app.url')!!}public/export/visitor" class="btn btn-success" type="button">Export To Excel</a>
+                            @endif
                         </div>
                     </div>
                     </form>

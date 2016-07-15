@@ -50,7 +50,9 @@
                     <div class="container"> 
                         <div class="row">
                             <div class="col-md-11 text-right">
+                                @if($username != "admin1week")
                                 <a href="{!!config('app.url')!!}public/export/checkin" class="btn btn-primary">Export To Excel</a>
+                                @endif
                             </div>
                         </div>
                     </div>
