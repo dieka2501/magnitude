@@ -49,6 +49,7 @@ class dashboardController extends Controller
         // $total_checkin      = count($this->checkin->get_checkin_today());
         $view['role']          = session('role');
         // $view['visitor']       = $get_visitor;
+        //untuk coba coba
         if(count($get_top_pos) > 0){
             foreach ($get_top_pos as $top_pos) {
                 $view['top_pos_jumlah'.$pos]       = $top_pos->jumlah;
