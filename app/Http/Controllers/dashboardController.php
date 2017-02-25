@@ -64,6 +64,7 @@ class dashboardController extends Controller
             
         }
         
+        //sdsdsd
         if(count($get_top_region) > 0){
             foreach ($get_top_region as $top_region) {
                 $view['top_reg_jumlah'.$reg]       = $top_region->jumlah;
@@ -77,6 +78,7 @@ class dashboardController extends Controller
             }
         }   
         
+        //sdsdsdsd
         if(count($get_top_lob) > 0){
             foreach ($get_top_lob as $top_lob) {
                 $view['top_lob_jumlah'.$lob]       = $top_lob->jumlah;
