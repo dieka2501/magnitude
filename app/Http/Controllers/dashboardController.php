@@ -49,21 +49,46 @@ class dashboardController extends Controller
         // $total_checkin      = count($this->checkin->get_checkin_today());
         $view['role']          = session('role');
         // $view['visitor']       = $get_visitor;
-        foreach ($get_top_pos as $top_pos) {
-            $view['top_pos_jumlah'.$pos]       = $top_pos->jumlah;
-            $view['top_pos'.$pos]              = $top_pos->jabatan;
-            $pos++;
+        if(count($get_top_pos) > 0){
+            foreach ($get_top_pos as $top_pos) {
+                $view['top_pos_jumlah'.$pos]       = $top_pos->jumlah;
+                $view['top_pos'.$pos]              = $top_pos->jabatan;
+                $pos++;
+            }    
+        }else{
+            for ($ipos=0; $ipos < 3 ; $ipos++) { 
+                $view['top_pos_jumlah'.$ipos]       = 0;
+                $view['top_pos'.$ipos]              = "Belum ada data";
+            }
+            
         }
-        foreach ($get_top_region as $top_region) {
-            $view['top_reg_jumlah'.$reg]       = $top_region->jumlah;
-            $view['top_reg'.$reg]              = $top_region->region;
-            $reg++;
+        
+        if(count($get_top_region) > 0){
+            foreach ($get_top_region as $top_region) {
+                $view['top_reg_jumlah'.$reg]       = $top_region->jumlah;
+                $view['top_reg'.$reg]              = $top_region->region;
+                $reg++;
+            }    
+        }else{
+            for ($ireg=0; $ireg < 5 ; $ireg++) { 
+                $view['top_reg_jumlah'.$ireg]       = 0;
+                $view['top_reg'.$ireg]              = "Belum ada data";
+            }
+        }   
+        
+        if(count($get_top_lob) > 0){
+            foreach ($get_top_lob as $top_lob) {
+                $view['top_lob_jumlah'.$lob]       = $top_lob->jumlah;
+                $view['top_lob'.$lob]              = $top_lob->bidang;
+                $lob++;
+            }    
+        }else{
+            for ($ilob=0; $ilob < 5; $ilob++) { 
+                $view['top_lob_jumlah'.$ilob]       = 0;
+                $view['top_lob'.$ilob]              = "Belum ada data";
+            }
         }
-        foreach ($get_top_lob as $top_lob) {
-            $view['top_lob_jumlah'.$lob]       = $top_lob->jumlah;
-            $view['top_lob'.$lob]              = $top_lob->bidang;
-            $lob++;
-        }
+        
         
         $view['hall1']         = $get_hall1;
         $view['nusantara']     = $get_nusantara;

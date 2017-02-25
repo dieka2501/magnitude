@@ -28,6 +28,12 @@
                 <li>
                     <a href="{!!config('app.url')!!}public/admin/event/checkin"><i class="fa fa-diamond"></i> <span class="nav-label">Check In List</span></a>
                 </li>
+                @if($username == "admin" || $username == 'adminnew')
+                <li>
+                    <a href="{!!config('app.url')!!}public/admin/exibitor"><i class="fa fa-diamond"></i> <span class="nav-label">Exibitor</span></a>
+                </li>
+                @endif
+
                 <!-- <li>
                     <a href="#"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">Graphs</span><span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level collapse">

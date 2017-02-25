@@ -65,7 +65,7 @@ class loginController extends Controller
                                 // if($get_login->group == 'admin'){
                                 return redirect('/admin');               
                             }else{
-                                $request->session()->flash('status','<div class="alert alert-danger">Batas waktu akun anda telah habis, silakan hubungi info@data-driven.asia</div>');
+                                $request->session()->flash('status','<div class="alert alert-danger">Batas waktu akun anda telah habis, silakan hubungi insight@data-driven.asia</div>');
                                 return redirect('/login');                    
                             }
                     }else{
