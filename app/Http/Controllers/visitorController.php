@@ -104,7 +104,7 @@ class visitorController extends Controller
         }
         // var_dump($arr_position);die;
         $view['list']                        = $getvisitor;
-        $view['url']                         = "business/excel";
+        $view['url']                         = "/visitor/excel";
         $view['notip']                       = session('notip');
         $view['arr_position']                = $arr_position;
         $view['position']                    = $request->input('position');

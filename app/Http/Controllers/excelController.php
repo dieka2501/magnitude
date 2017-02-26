@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use App\visitor;
 use App\checkinEvent;
 use App\curl;
+use Log;
 class excelController extends Controller
 {
     function __construct(){
@@ -30,6 +31,7 @@ class excelController extends Controller
             $files      = $request->file('files');
             $ext        = $files->getClientOriginalExtension();
             $filename   = $files->getClientOriginalName();
+            Log::info([$ext]);
             if($ext == 'xls' || $ext == 'xlsx'){
                 if($files->move($path,$filename)){
                     Excel::filter('chunk')->load($path.$filename)->chunk(200,function($result){
@@ -83,7 +85,7 @@ class excelController extends Controller
                                             $curl['address']                = $insert['alamat'];
                                             $curl['company']                = $insert['perusahaan'];
                                             $encode             = json_encode($curl);
-                                            $this->curl->post($this->url,$encode);
+                                            // $this->curl->post($this->url,$encode);
 
                                         }
                                     }
