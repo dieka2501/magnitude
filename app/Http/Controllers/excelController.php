@@ -35,7 +35,7 @@ class excelController extends Controller
             if($ext == 'xls' || $ext == 'xlsx'){
                 if($files->move($path,$filename)){
                     Excel::filter('chunk')->load($path.$filename)->chunk(200,function($result){
-                        // var_dump($result);die;
+                        var_dump($result);die;
                         foreach ($result as $res) {
                         	// $firstname 				= ($res->firstname != null)?$res->firstname : "";
                         	// $lastname 				= ($res->lastname != null)?$res->lastname : "";
@@ -54,7 +54,7 @@ class excelController extends Controller
                             $source_information     = ($res->source_information != null)?$res->source_information : ""; 
                             
                             if(true){
-                                if((count($this->visitor->get_email($email))==0 && count($this->visitor->get_phone($phone))==0) || ($email == "" || $phone == "") ){
+                                if(true){
                                     if(is_string(filter_var($email,FILTER_VALIDATE_EMAIL))){
                                         $insert['nama_visitor']         = str_replace([",","/",'"'], "",$nama);
                                         $insert['perusahaan']           = str_replace([",","/",'"'], "",$perusahaan);
