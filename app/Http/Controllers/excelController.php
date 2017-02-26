@@ -31,13 +31,15 @@ class excelController extends Controller
             $files      = $request->file('files');
             $ext        = $files->getClientOriginalExtension();
             $filename   = $files->getClientOriginalName();
-            Log::info([$ext]);
+            // Log::info([$ext]);
             if($ext == 'xls' || $ext == 'xlsx'){
                 if($files->move($path,$filename)){
                     Excel::filter('chunk')->load($path.$filename)->chunk(200,function($result){
                         // var_dump($result);die;
                         foreach ($result as $res) {
-                            $nama                   = ($res->nama != null)?$res->nama : "";
+                        	$firstname 				= ($res->firstname != null)?$res->firstname : "";
+                        	$lastname 				= ($res->lastname != null)?$res->lastname : "";
+                            // $nama                   = ($res->nama != null)?$res->nama : "";
                             $perusahaan             = ($res->perusahaan != null)?$res->perusahaan : "";
                             $jabatan                = ($res->jabatan != null)?$res->jabatan : "";
                             $tujuan                 = ($res->tujuan != null)?$res->tujuan : "";
@@ -54,7 +56,7 @@ class excelController extends Controller
                             if(true){
                                 if((count($this->visitor->get_email($email))==0 && count($this->visitor->get_phone($phone))==0) || ($email == "" || $phone == "") ){
                                     if(is_string(filter_var($email,FILTER_VALIDATE_EMAIL))){
-                                        $insert['nama_visitor']         = str_replace([",","/",'"'], "",$nama);
+                                        $insert['nama_visitor']         = str_replace([",","/",'"'], "",$firstname." ".$lastname);
                                         $insert['perusahaan']           = str_replace([",","/",'"'], "",$perusahaan);
                                         $insert['jabatan']              = str_replace([",","/",'"'], "",$jabatan);
                                         $insert['purpose']              = str_replace([",","/",'"'], "",$tujuan);
@@ -92,7 +94,7 @@ class excelController extends Controller
                                 }
                             }
                         }
-                    });
+                    },false);
                     $request->session()->flash('notip','Data berhasil diupload.');
                     return redirect('admin/visitor');        
                 }else{

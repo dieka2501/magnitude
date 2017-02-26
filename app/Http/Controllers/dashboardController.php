@@ -50,7 +50,7 @@ class dashboardController extends Controller
         $view['role']          = session('role');
         // $view['visitor']       = $get_visitor;
         //untuk coba coba
-        if(count($get_top_pos) > 0){
+        if(count($get_top_pos) > 10){
             foreach ($get_top_pos as $top_pos) {
                 $view['top_pos_jumlah'.$pos]       = $top_pos->jumlah;
                 $view['top_pos'.$pos]              = $top_pos->jabatan;
@@ -65,7 +65,7 @@ class dashboardController extends Controller
         }
         
         //sdsdsd
-        if(count($get_top_region) > 0){
+        if(count($get_top_region) > 10){
             foreach ($get_top_region as $top_region) {
                 $view['top_reg_jumlah'.$reg]       = $top_region->jumlah;
                 $view['top_reg'.$reg]              = $top_region->region;
@@ -79,7 +79,7 @@ class dashboardController extends Controller
         }   
         
         //sdsdsdsd
-        if(count($get_top_lob) > 0){
+        if(count($get_top_lob) > 10){
             foreach ($get_top_lob as $top_lob) {
                 $view['top_lob_jumlah'.$lob]       = $top_lob->jumlah;
                 $view['top_lob'.$lob]              = $top_lob->bidang;

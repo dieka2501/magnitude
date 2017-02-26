@@ -50,6 +50,14 @@ Route::get('/admin/visitor/history/{id}', 'visitorController@history');
 // ADMIN List Check in
 Route::get('/admin/event/checkin', 'checkinEventController@index');
 
+// Admin Exibitor
+Route::get('/admin/exibitor', 'exibitorController@index');
+Route::get('/admin/exibitor/create', 'exibitorController@create');
+Route::post('/admin/exibitor/create', 'exibitorController@store');
+Route::get('/admin/exibitor/edit/{id}', 'exibitorController@edit');
+Route::post('/admin/exibitor/edit', 'exibitorController@update');
+Route::get('/admin/exibitor/delete/{id}', 'exibitorController@destroy');
+
 //UPLOAD EXCEL
 Route::post('/visitor/excel', 'excelController@index');
 
