@@ -35,7 +35,7 @@ class excelController extends Controller
             if($ext == 'xls' || $ext == 'xlsx'){
                 if($files->move($path,$filename)){
                     Excel::filter('chunk')->load($path.$filename)->chunk(200,function($result){
-                        var_dump($result);die;
+                        // var_dump($result);die;
                         foreach ($result as $res) {
                         	// $firstname 				= ($res->firstname != null)?$res->firstname : "";
                         	// $lastname 				= ($res->lastname != null)?$res->lastname : "";
