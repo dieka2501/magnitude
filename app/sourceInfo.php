@@ -14,5 +14,8 @@ class sourceInfo extends Model
 	function get_name($name){
 		return sourceInfo::where('info_name',$name)->first();
 	}
+	function getAllSourceInfoName(){
+    	return sourceInfo::select("info_name","id_info")->groupBy('id_info')->get();
+    }   
     //
 }

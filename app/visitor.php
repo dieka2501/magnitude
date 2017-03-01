@@ -83,7 +83,7 @@ class visitor extends Model
 		$sqlsource		= "`source_information` like '%' AND ";
 		$sqlemail		= "`email` like '%'";
 		$cposition 		= count($position);
-		// var_dump($position);die;
+		
 		if($position[0]!=""){
 			$sqlposition 	= "(";
 			for ($pstn=0; $pstn < $cposition ; $pstn++) { 
@@ -232,5 +232,141 @@ class visitor extends Model
 		return visitor::select(DB::raw('COUNT(*) as jumlah, `bidang`'))->whereRaw("`bidang`!='0' AND `bidang`!= ''")
 				->groupBy('bidang')->orderBy('jumlah','DESC')->take(5)->get();
 	}
-    //
+    //chart
+	function getAllCountry()
+	{
+		return visitor::select("country")->groupBy('country')->get();
+	}
+	function getAllRegion()
+	{
+		return visitor::select("region")->groupBy('region')->get();
+	}	
+	function getAllPosition()
+	{
+		return visitor::select("jabatan")->groupBy('jabatan')->get();
+	}
+	function getAllLineBusiness()
+	{
+		return visitor::select("bidang")->groupBy('bidang')->get();
+	}
+	function getAllPurpose()
+	{
+		return visitor::select("purpose")->groupBy('purpose')->get();
+	}
+	function getAllSourceInformation()
+	{
+		return visitor::select("source_information")->groupBy('source_information')->get();
+	}
+
+	//Chart Count
+	function getCountCountry()
+	{
+		return visitor::select(DB::raw('count(*) as total,country as nama'))->groupBy('country')->get();
+	}
+	function getCountRegion()
+	{
+		return visitor::select(DB::raw('count(*) as total,region'))->groupBy('region')->get();
+	}
+	function getCountPosition()
+	{
+		return visitor::select(DB::raw('count(*) as total,jabatan'))->groupBy('jabatan')->get();
+	}
+	function getCountAllLineBusiness()
+	{
+		return visitor::select(DB::raw('count(*) as total,bidang'))->groupBy('bidang')->get();
+	}
+	function getCountPurpose()
+	{
+		return visitor::select(DB::raw('count(*) as total,purpose'))->groupBy('purpose')->get();
+	}
+	function getCountSourceInformation()
+	{
+		return visitor::select(DB::raw('count(*) as total,source_information'))->groupBy('source_information ')->get();
+	}
+
+	function searchQuery($nameField,$value)
+	{	
+		return DB::select('SELECT  COUNT('.$nameField.')as total, '.$nameField.' as nama 
+							FROM profile_visitor 
+							GROUP BY '.$nameField.' 
+							HAVING '.$value); 
+	}
+
+	function searchRegion($value)
+	{	
+		return DB::select('SELECT  COUNT(region)as total, region as nama 
+							FROM profile_visitor 
+							GROUP BY region 
+							HAVING region = "'.$value.'" 
+							or region = "'.$value.'" 
+							or region = "'.$value.'"
+							or region = "'.$value.'"
+							or region = "'.$value.'"
+							'); 
+	}
+
+	function searchPosition($value)
+	{	
+		return DB::select('SELECT  COUNT(jabatan)as total, jabatan as nama 
+							FROM profile_visitor 
+							GROUP BY jabatan 
+							HAVING jabatan = "'.$value.'" 
+							or jabatan = "'.$value.'" 
+							or jabatan = "'.$value.'"
+							or jabatan = "'.$value.'"
+							or jabatan = "'.$value.'"
+							'); 
+	}
+
+	function searchBusiness($value)
+	{	
+		return DB::select('SELECT  COUNT(bidang)as total, bidang as nama 
+							FROM profile_visitor 
+							GROUP BY bidang 
+							HAVING bidang = "'.$value.'" 
+							or bidang = "'.$value.'" 
+							or bidang = "'.$value.'"
+							or bidang = "'.$value.'"
+							or bidang = "'.$value.'"
+							'); 
+	}
+	
+	function searchPurpose($value)
+	{	
+		return DB::select('SELECT  COUNT(purpose)as total, purpose as nama 
+							FROM profile_visitor 
+							GROUP BY purpose 
+							HAVING purpose = "'.$value.'" 
+							or purpose = "'.$value.'" 
+							or purpose = "'.$value.'"
+							or purpose = "'.$value.'"
+							or purpose = "'.$value.'"
+							'); 
+	}
+
+	function searchInformation($value)
+	{	
+		return DB::select('SELECT  COUNT(source_information)as total, source_information as nama 
+							FROM profile_visitor 
+							GROUP BY source_information 
+							HAVING source_information = "'.$value.'" 
+							or source_information = "'.$value.'" 
+							or source_information = "'.$value.'"
+							or source_information = "'.$value.'"
+							or source_information = "'.$value.'"
+							'); 
+	}
+
+	function searchInterestProduct($value)
+	{	
+		return DB::select('SELECT  COUNT(interest_product)as total, interest_product as nama 
+							FROM profile_visitor 
+							GROUP BY interest_product 
+							HAVING interest_product = "'.$value.'" 
+							or interest_product = "'.$value.'" 
+							or interest_product = "'.$value.'"
+							or interest_product = "'.$value.'"
+							or interest_product = "'.$value.'"
+							'); 
+	}
 }

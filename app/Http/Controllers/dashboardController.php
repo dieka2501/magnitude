@@ -9,12 +9,21 @@ use App\Http\Controllers\Controller;
 use App\visitor;
 use App\checkinEvent;
 
+use App\region;
+use App\position;
+use App\business;
+use App\purpose;
+use App\sourceInfo;
+use App\kategori;
+
 class dashboardController extends Controller
 {
     function __construct(){
         $this->middleware('auth');
         $this->visitor = new visitor;
         $this->checkin = new checkinEvent;
+        $this->visitor = new visitor;
+        $this->kategori = new kategori;
     }
     /**
      * Display a listing of the resource.
@@ -49,49 +58,21 @@ class dashboardController extends Controller
         // $total_checkin      = count($this->checkin->get_checkin_today());
         $view['role']          = session('role');
         // $view['visitor']       = $get_visitor;
-        //untuk coba coba
-        if(count($get_top_pos) > 10){
-            foreach ($get_top_pos as $top_pos) {
-                $view['top_pos_jumlah'.$pos]       = $top_pos->jumlah;
-                $view['top_pos'.$pos]              = $top_pos->jabatan;
-                $pos++;
-            }    
-        }else{
-            for ($ipos=0; $ipos < 3 ; $ipos++) { 
-                $view['top_pos_jumlah'.$ipos]       = 0;
-                $view['top_pos'.$ipos]              = "Belum ada data";
-            }
-            
+        foreach ($get_top_pos as $top_pos) {
+            $view['top_pos_jumlah'.$pos]       = $top_pos->jumlah;
+            $view['top_pos'.$pos]              = $top_pos->jabatan;
+            $pos++;
         }
-        
-        //sdsdsd
-        if(count($get_top_region) > 10){
-            foreach ($get_top_region as $top_region) {
-                $view['top_reg_jumlah'.$reg]       = $top_region->jumlah;
-                $view['top_reg'.$reg]              = $top_region->region;
-                $reg++;
-            }    
-        }else{
-            for ($ireg=0; $ireg < 5 ; $ireg++) { 
-                $view['top_reg_jumlah'.$ireg]       = 0;
-                $view['top_reg'.$ireg]              = "Belum ada data";
-            }
-        }   
-        
-        //sdsdsdsd
-        if(count($get_top_lob) > 10){
-            foreach ($get_top_lob as $top_lob) {
-                $view['top_lob_jumlah'.$lob]       = $top_lob->jumlah;
-                $view['top_lob'.$lob]              = $top_lob->bidang;
-                $lob++;
-            }    
-        }else{
-            for ($ilob=0; $ilob < 5; $ilob++) { 
-                $view['top_lob_jumlah'.$ilob]       = 0;
-                $view['top_lob'.$ilob]              = "Belum ada data";
-            }
+        foreach ($get_top_region as $top_region) {
+            $view['top_reg_jumlah'.$reg]       = $top_region->jumlah;
+            $view['top_reg'.$reg]              = $top_region->region;
+            $reg++;
         }
-        
+        foreach ($get_top_lob as $top_lob) {
+            $view['top_lob_jumlah'.$lob]       = $top_lob->jumlah;
+            $view['top_lob'.$lob]              = $top_lob->bidang;
+            $lob++;
+        }
         
         $view['hall1']         = $get_hall1;
         $view['nusantara']     = $get_nusantara;
@@ -99,6 +80,7 @@ class dashboardController extends Controller
         $view['hall10']        = $get_hall10;
         view()->share('date_exp', $date_exp);
         view()->share('username', session('username'));
+       
         return view('dashboard.indexadmin',$view);
     }
 
@@ -176,5 +158,115 @@ class dashboardController extends Controller
         // }else{
         //     return redirect('/admin');
         // }
+    }
+
+    public static function pecahData($modelName, $nameField, $nameText)
+    {
+        $json = [];
+        $arrayname = array();
+        foreach ($modelName as $key) {
+            if (!empty($key[$nameField])) {               
+                $json[] = ['id'=>$key[$nameField],'text'=>$key[$nameField]];
+            }
+        }
+        $arrayname = array(
+            'text' => $nameText,
+            'children'=> $json            
+        );
+        return $arrayname;
+    }
+
+    public function filterParam($fieldName,$puras)
+    {
+       $param = '';
+        for ($i=0; $i < sizeof($puras) ; $i++) { 
+            $param = $param.''.$fieldName.' = '."'$puras[$i]'".' ';
+            if ($i != sizeof($puras)-1 ) {
+                $param = $param.'OR ';
+            }
+        }
+
+        return $param;
+    }
+    public static function postFilter($request)
+    {
+        $filter = $request->get('data');
+        return $filter;
+    }
+
+    public function searchQuery($value)
+    {
+        $data = $this->visitor->searchCountry($value);
+
+    }
+
+    public function filterResult($param1, $param2)
+    {
+        $difilter = $this->filterParam($param1, $param2);
+        $data =  $this->visitor->searchQuery($param1,$difilter); 
+
+        return $data;
+    }
+
+    public function allQuery($filter)
+    {
+        $data1 =  $this->filterResult("region",$filter);
+        $data2 =  $this->filterResult("bidang",$filter);
+        $data3 =  $this->filterResult("jabatan",$filter);
+        $data4 =  $this->filterResult("purpose",$filter);
+        $data5 =  $this->filterResult("source_information",$filter);
+        $data6 =  $this->filterResult("interest_product",$filter);
+        $data7 =  $this->filterResult("country",$filter);
+
+        $data = array_merge($data1,$data2,$data3,$data4,$data5,$data6,$data7);
+        return $data;
+    }
+
+
+    public function filter()
+    {
+        //Get data From model
+        $countrys            =   $this->visitor->getAllCountry();
+        $regions             =   $this->visitor->getAllRegion();
+        $positions           =   $this->visitor->getAllPosition();
+        $lineBusiness        =   $this->visitor->getAllLineBusiness();
+        $purpose             =   $this->visitor->getAllPurpose();
+        $sourceInformation   =   $this->visitor->getAllSourceInformation();
+        $interestProducts    =   $this->kategori->getAllKategoriName();        
+
+        $dataKategori = $this->pecahData($interestProducts,'nama_kategori','Interest Product');
+        $dataRegion = $this->pecahData($regions,'region','City / Region');
+        $dataCountry = $this->pecahData($countrys,'country','Country');
+        $dataPosition = $this->pecahData($positions,'jabatan','Position');
+        $dataPurpose = $this->pecahData($purpose,'purpose','Purpose / Need');
+        $dataInformation = $this->pecahData($sourceInformation,'source_information','Source Information');
+        $dataBusiness = $this->pecahData($lineBusiness,'bidang','Line Of Business');
+        $data = array($dataCountry, $dataRegion, $dataPosition, $dataBusiness, $dataPurpose,$dataInformation, $dataKategori);  
+       return response()->json($data);
+    }
+       public function dataTesting(Request $request)
+        {
+            $puras = $request->get('data');
+            $datass =  $this->allQuery($puras);
+        
+            $rows = [];
+
+            foreach ($datass as $key ) {                 
+            $rows[] = ["c" =>  array( 
+                                    array("v"=>$key->nama,"f"=>null),
+                                    array("v"=>$key->total,"f"=>null,)
+                                )];
+        }
+
+        $sample = array(
+                "cols" => array(
+                    array("id" => "" , "label" => "Topping" , "patterns" => "" , "type" => "string"),
+                    array("id" => "" , "label" => "Slices" , "patterns" => "" , "type" => "number")
+                ),
+                "rows" => $rows 
+        );
+        $encode = json_encode($sample);     
+        return $encode;
+        return response()->json($sample);
     }
 }

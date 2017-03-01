@@ -32,12 +32,6 @@ Route::get('/seller', 'sellerController@index');
 // DASHBOARD ADMIN
 Route::get('/admin', 'dashboardController@indexadmin');
 
-
-// Filter
-Route::get('/chart/filter', 'dashboardController@filter');
-Route::post('/chart/send', 'dashboardController@dataTesting');
-
-
 // ADMIN SELLER PAGE
 Route::get('/admin/seller', 'sellerController@list_seller');
 Route::get('/admin/seller/create', 'sellerController@create');
@@ -55,6 +49,14 @@ Route::get('/admin/visitor/history/{id}', 'visitorController@history');
 
 // ADMIN List Check in
 Route::get('/admin/event/checkin', 'checkinEventController@index');
+
+// Admin Exibitor
+Route::get('/admin/exibitor', 'exibitorController@index');
+Route::get('/admin/exibitor/create', 'exibitorController@create');
+Route::post('/admin/exibitor/create', 'exibitorController@store');
+Route::get('/admin/exibitor/edit/{id}', 'exibitorController@edit');
+Route::post('/admin/exibitor/edit', 'exibitorController@update');
+Route::get('/admin/exibitor/delete/{id}', 'exibitorController@destroy');
 
 //UPLOAD EXCEL
 Route::post('/visitor/excel', 'excelController@index');
